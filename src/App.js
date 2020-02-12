@@ -11,7 +11,14 @@ import Cart from './components/cart';
 class App extends Component {
 
   state = {
-    cart: []
+    cart: [],
+    valueOrder: 0,
+  }
+
+  pizza = {
+    name : "mussarela",
+    price: "100",
+    
   }
 
   handleCart (value) {
@@ -33,7 +40,7 @@ class App extends Component {
           <Route path='/orders' render={() => <Orders orders={this.state.cart}/>} />
           {/* <Route exact path='/' render={() => <Home changeState={this.changeState} api={this.callApi} data={this.state.allPlants} />} /> */}
         </Switch>
-        <Cart />
+        <Cart cart={this.state.cart} />
   
       </div>
     );

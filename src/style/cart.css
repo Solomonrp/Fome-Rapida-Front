@@ -5,14 +5,26 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    bottom: 323px;
+    bottom: 253px;
     min-width: 413px;
     padding: 5px 0px;
+    flex-wrap: wrap;
+    /* margin: 0px 0px -20px 0px; */
+    transition: margin .5s;
+    z-index: 1;
   }
 
   .cart_car_img {
     width: 30px;
     height: 30px;
     margin-left: 10px;
+  }
+
+  .cart__closed {
+    width: 400px;
+  }
+
+  .cart__opened {
+    margin-bottom: 0px;
   }
 }

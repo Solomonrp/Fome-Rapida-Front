@@ -1,6 +1,6 @@
 @media only screen and (min-width : 320px) and (max-width : 480px) {
   .wrapper {
     background: linear-gradient(90deg, red 33%, white 33%);;
-    min-height: 500px;
+    min-height: 540px;
   }
 }

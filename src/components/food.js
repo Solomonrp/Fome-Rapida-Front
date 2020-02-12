@@ -10,22 +10,24 @@ class Food extends Component {
 
   }
 
-  handlePlusBtn (event) {
+  handlePlusBtn(event) {
     let quantity = event.currentTarget.nextElementSibling.innerText;
     event.currentTarget.nextElementSibling.innerText = Number(quantity) + 1;
-    let price = parseFloat(event.currentTarget.parentNode.nextSibling.firstChild.innerText.slice(8,90));
+    let price = parseFloat(event.currentTarget.parentNode.nextSibling.firstChild.innerText.slice(8, 90));
     console.log(price);
     event.currentTarget.parentNode.nextSibling.firstChild.innerText = `Price R$${price + 100},00  `
   }
 
-  handleMinusBtn (event) {
+  handleMinusBtn(event) {
     let quantity = Number(event.currentTarget.previousSibling.innerText);
-    let price = parseFloat(event.currentTarget.parentNode.nextSibling.firstChild.innerText.slice(8,90))
-    if(quantity === 1 || price === 100 ){
+    console.log(quantity)
+    let price = parseFloat(event.currentTarget.parentNode.nextSibling.firstChild.innerText.slice(8, 90))
+    console.log(price)
+    if (quantity === 1 || price === 100) {
       return
     }
     event.currentTarget.previousSibling.innerText = Number(quantity) - 1;
-    event.currentTarget.parentNode.nextSibling.firstChild.innerText = `Price R$${price - price},00  `
+    event.currentTarget.parentNode.nextSibling.firstChild.innerText = `Price R$${price - 100},00  `
   }
 
   render() {
@@ -39,14 +41,14 @@ class Food extends Component {
             <div className="food__data_desc">
               <span>Pizza</span>
               {
-                this.props.type !== 'category' && 
-              <div>
-                <span className="fa fa-star checked"></span>
-                <span className="fa fa-star checked"></span>
-                <span className="fa fa-star checked"></span>
-                <span className="fa fa-star"></span>
-                <span className="fa fa-star"></span>
-              </div>
+                this.props.type !== 'category' &&
+                <div>
+                  <span className="fa fa-star checked"></span>
+                  <span className="fa fa-star checked"></span>
+                  <span className="fa fa-star checked"></span>
+                  <span className="fa fa-star"></span>
+                  <span className="fa fa-star"></span>
+                </div>
               }
               <span>Itens: 10</span>
             </div>
@@ -55,16 +57,16 @@ class Food extends Component {
                 <div>
                   <Link to={`/category/itens`} className="food_desc">></Link>
                 </div>
-              : this.props.type === 'food' ?
-                <div>
-                  <a className="food_desc">+</a>
-                </div>
-              :
-                <div>
-                  <a className="food_desc food_desc_plus" onClick={this.handlePlusBtn}>+</a>
-                  <a className="food_desc food_desc_quantity">1</a>
-                  <a className="food_desc food_desc_minus" onClick={this.handleMinusBtn}>-</a>
-                </div>
+                : this.props.type === 'food' ?
+                  <div>
+                    <a className="food_desc">+</a>
+                  </div>
+                  :
+                  <div>
+                    <a className="food_desc food_desc_plus" onClick={this.handlePlusBtn}>+</a>
+                    <a className="food_desc food_desc_quantity">1</a>
+                    <a className="food_desc food_desc_minus" onClick={this.handleMinusBtn}>-</a>
+                  </div>
             }
             <div>
               <span>Price R$100,00</span>
