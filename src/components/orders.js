@@ -8,8 +8,14 @@ class Orders extends Component {
     return (
       <React.Fragment>
         <div>
-          <Food type='cart' />
-          <Food type='cart' />
+          {
+            this.props.orders &&
+            this.props.orders.map((food, index) => {
+              return <Food type='food' id={index} {...food} />
+            })
+          }
+          {/* <Food type='cart' /> */}
+          {/* <Food type='cart' /> */}
         </div>
       </React.Fragment>
     )

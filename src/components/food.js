@@ -7,7 +7,7 @@ class Food extends Component {
 
 
   handleClickCart = () => {
-
+    this.props.handleCart(this.props);
   }
 
   handlePlusBtn(event) {
@@ -32,14 +32,18 @@ class Food extends Component {
 
   render() {
     return (
-      <div className="food">
+      <div className="food" id={this.props.id} category={this.props.category}>
         <div className="food_wrapper">
           <div className="food__img">
-            <img className="food__img__food" src={Pizza} />
+            <img className="food__img__food" src={this.props.img} />
+            {
+              console.log(this.props.name)
+              // console.log(this.props.data.name)
+            }
           </div>
           <div className="food__data">
             <div className="food__data_desc">
-              <span>Pizza</span>
+              <span>{this.props.name}</span>
               {
                 this.props.type !== 'category' &&
                 <div>
@@ -55,11 +59,11 @@ class Food extends Component {
             {
               this.props.type === 'category' ?
                 <div>
-                  <Link to={`/category/itens`} className="food_desc">></Link>
+                  <Link to={`/category/itens?category=${this.props.category}`} className="food_desc">></Link>
                 </div>
                 : this.props.type === 'food' ?
                   <div>
-                    <a className="food_desc">+</a>
+                    <a className="food_desc" onClick={this.handleClickCart}>+</a>
                   </div>
                   :
                   <div>
@@ -69,7 +73,7 @@ class Food extends Component {
                   </div>
             }
             <div>
-              <span>Price R$100,00</span>
+              <span>Price R${this.props.price},00</span>
             </div>
           </div>
         </div>
