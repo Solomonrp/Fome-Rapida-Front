@@ -58,6 +58,7 @@ class App extends Component {
     const state = { ...this.state };
 
       state.pedidos[Indexpedido].itens[item].status = 'concluido';
+      state.pedidos[Indexpedido].statusPedido = 'realizado';
       if (state.pedidos[Indexpedido].ItensConcluidos === 0) {
         state.pedidos[Indexpedido].ItensConcluidos = 1;
         this.setState(state);
