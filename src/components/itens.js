@@ -15,6 +15,12 @@ class Itens extends Component {
     const params = queryString.parse(category);
     console.log('categoria', params.category);
     this.handleCategory()
+    // this.props.background(66);
+    document.body.classList.add('itensBack');
+  }
+
+  componentWillUnmount() {
+    document.body.classList.remove('itensBack');
   }
 
   handleCategory = () => {
@@ -34,6 +40,7 @@ class Itens extends Component {
   render() {
     return (
       <React.Fragment>
+        <Nav />
         <div>
           {
             this.state.filtered ?

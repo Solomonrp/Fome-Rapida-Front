@@ -5,29 +5,43 @@ import Pizza from "../style/img/category/foodiesfeed.com_neapolitan-pizza-marghe
 
 class Food extends Component {
 
+  componentDidMount(){
+    console.log(this.props)
+    // this.props.handleCartChange()
+  }
+
+  state = {
+    id: 0,
+    quantity: 0,
+    price: 0
+  }
 
   handleClickCart = () => {
     this.props.handleCart(this.props);
   }
 
-  handlePlusBtn(event) {
+  handlePlusBtn = (event) => {
+    let id = event.currentTarget.parentNode.id;
     let quantity = event.currentTarget.nextElementSibling.innerText;
     event.currentTarget.nextElementSibling.innerText = Number(quantity) + 1;
-    let price = parseFloat(event.currentTarget.parentNode.nextSibling.firstChild.innerText.slice(8, 90));
+    let price = parseFloat(document.querySelectorAll('.food__price_wrapper')[id].innerText.slice(8, 90));
+    this.props.changeCart(id,quantity,price);
+    // this.change(id,quantity,price);
     console.log(price);
-    event.currentTarget.parentNode.nextSibling.firstChild.innerText = `Price R$${price + 100},00  `
   }
 
-  handleMinusBtn(event) {
+  handleMinusBtn = (event) => {
     let quantity = Number(event.currentTarget.previousSibling.innerText);
     console.log(quantity)
-    let price = parseFloat(event.currentTarget.parentNode.nextSibling.firstChild.innerText.slice(8, 90))
+    let id = event.currentTarget.parentNode.id;
+    console.log(id)
+    let price = parseFloat(document.querySelectorAll('.food__price_wrapper')[id].innerText.slice(8, 90))
     console.log(price)
     if (quantity === 1 || price === 100) {
       return
     }
     event.currentTarget.previousSibling.innerText = Number(quantity) - 1;
-    event.currentTarget.parentNode.nextSibling.firstChild.innerText = `Price R$${price - 100},00  `
+    this.props.changeCart(id,quantity,price);
   }
 
   render() {
@@ -36,10 +50,6 @@ class Food extends Component {
         <div className="food_wrapper">
           <div className="food__img">
             <img className="food__img__food" src={this.props.img} />
-            {
-              console.log(this.props.name)
-              // console.log(this.props.data.name)
-            }
           </div>
           <div className="food__data">
             <div className="food__data_desc">
@@ -54,28 +64,37 @@ class Food extends Component {
                   <span className="fa fa-star"></span>
                 </div>
               }
-              <span>Itens: 10</span>
+              {
+                this.props.type === 'category' && <span>Itens: 10</span>
+              }
+              
             </div>
+          </div>
+          {
+              this.props.type !== 'category' &&
+            <div className="food__price_wrapper">
+              <span>Price R${this.props.price},00</span>
+            </div>
+            }
+
             {
               this.props.type === 'category' ?
-                <div>
-                  <Link to={`/category/itens?category=${this.props.category}`} className="food_desc">></Link>
+                <div className="food_desc2_wrapper">
+                  <Link to={`/category/itens?category=${this.props.category}`} className="food_desc2">></Link>
                 </div>
                 : this.props.type === 'food' ?
-                  <div>
-                    <a className="food_desc" onClick={this.handleClickCart}>+</a>
+                  <div className="food__desc--category">
+                    <a className="food_desc food_desc_plus" onClick={this.handleClickCart}>+</a>
+                    <Link to={'/orders'} className="food_desc food_desc_plus" onClick={this.handleClickCart}>></Link>
                   </div>
                   :
-                  <div>
+                  <div id={this.props.idCart} className="food_desc_wrapper">
                     <a className="food_desc food_desc_plus" onClick={this.handlePlusBtn}>+</a>
                     <a className="food_desc food_desc_quantity">1</a>
                     <a className="food_desc food_desc_minus" onClick={this.handleMinusBtn}>-</a>
                   </div>
             }
-            <div>
-              <span>Price R${this.props.price},00</span>
-            </div>
-          </div>
+            
         </div>
       </div>
     )

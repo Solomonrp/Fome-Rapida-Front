@@ -8,8 +8,8 @@ import cart from '../style/img/icons/cart.png';
 class Cart extends Component {
 
   state = {
-    marg: this.props.cartSize,
-    oldMarg: 0,
+    cart: this.props.orders,
+    items: 0,
     price: 0,
     step: false,
   }
@@ -18,31 +18,32 @@ class Cart extends Component {
 
   
   componentDidUpdate(prevState, prevProps) {
-    // console.log(prevState.cart)
-    // console.log(prevState.cart[0].price)
-    // console.log(prevProps.marg)
-    // console.log(this.props.cartSize)
-    if(prevProps.marg !== this.props.cartSize) {
+    console.log('prevstate',prevState.orders)
+    console.log('prevstate',prevState.orders.length)
+    console.log(prevProps)
+    console.log(prevState.orders.length)
+    console.log(prevProps.items)
+    if(prevProps.items !== prevState.orders.length) {
       this.setState({
-        marg: this.props.cartSize,
-        oldMarg: prevProps.marg
+        items: prevState.orders.length
       })
       this.handleTeste()
     }
   }
   
   handleTeste = () => {
-    // console.log('cart',this.props.cart)
-    const array = this.props.cart.map( item => {
+    console.log('orders',this.props.orders)
+    const array = this.props.orders.map( item => {
       return item.price;
     })
+    
     console.log('priceeee',array);
     const price = array.reduce((acc, total) => {
-      console.log('accPrice',acc)
-      console.log('total',total)
+      // console.log('accPrice',acc)
+      // console.log('total',total)
       return acc + total;
     })
-    console.log('price',price)
+    // console.log('price',price)
     this.setState({
       price: price
     })
@@ -104,7 +105,8 @@ class Cart extends Component {
     }
 
     const itemStyle = {
-      // "padding" : "0.8px"
+      "padding": "10px 0px",
+      "fontSize": "20px"
     }
 
     const transitionOptions = {
@@ -120,6 +122,7 @@ class Cart extends Component {
         <div>
           <img src={cart} className="nav_car_img" />
         </div>
+        <Abtn>Pay</Abtn>
         <Abtn onClick={() => this.handleCart()} >+</Abtn>
         <div>
           <a>R$ {this.state.price},00</a>
@@ -128,8 +131,8 @@ class Cart extends Component {
           <ReactCSSTransitionGroup {...transitionOptions}> 
           {
             this.state.step &&
-              this.props.cart.map((item, index) => {
-                return <div style={itemStyle} key={index}>{item.name} R${item.price},00</div>
+              this.props.orders.map((item, index) => {
+                return <div style={itemStyle} key={index}>{item.name} Q:{item.quantity} R${item.price},00</div>
               })
           }
           </ReactCSSTransitionGroup>

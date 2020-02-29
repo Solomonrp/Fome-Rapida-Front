@@ -7,10 +7,13 @@ const Abtn = styled.a`
   font-size: 20px;
   font-weight: bold;
   text-align: center;
-  width: 25px;
+  width: 45px;
   height: 25px;
   border-radius: 15px;
   cursor: pointer;
+`
+const payBtn = styled.a`
+
 `
 
 export default Abtn;
