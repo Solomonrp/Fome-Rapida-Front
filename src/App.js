@@ -22,6 +22,8 @@ class App extends Component {
         itens: [{ product: "teste", quantidade: 50, tempo: "1:15", tempoRestante: "1:15", status: 'realizando' }, { product: "teste", quantidade: 50, tempo: "1:15", tempoRestante: "1:15", status: 'realizando' }, { product: "teste", quantidade: 50, tempo: "0:05", tempoRestante: "0:05", status: 'realizando' }],
         ItensConcluidos: 0,
         statusPedido: 'realizado',
+        tempoTotalInicial: '1:15',
+        tempoTotalRestante: '1:15',
       },
 
       {
@@ -30,6 +32,8 @@ class App extends Component {
         itens: [{ product: "teste", quantidade: 80, tempo: "0:03", tempoRestante: "0:03", status: 'realizando' }, { product: "teste", quantidade: 50, tempo: "0:09", tempoRestante: "0:09", status: 'realizando' }],
         ItensConcluidos: 0,
         statusPedido: 'realizado',
+        tempoTotalInicial: '0:09',
+        tempoTotalRestante: '0:09',
       }],
   }
 
@@ -41,38 +45,74 @@ class App extends Component {
     })
   }
 
-  alterStateTempoRestante = (pedido, item, tempo) => {
+  alterStateTempoRestante = (tipo, pedido, item, tempo) => {
     const state = { ...this.state };
-    state.pedidos[pedido].itens[item].tempoRestante = tempo.join(':');
+    switch (tipo) {
+      case 'item':
+        state.pedidos[pedido].itens[item].tempoRestante = tempo.join(':');
+        break;
+      case 'pedido':
+        state.pedidos[pedido].tempoTotalRestante = tempo.join(':');
+        break;
+      default:
+        console.log('deu muito ruim')
+    }
     this.setState(state);
   }
 
-  alterStateAtrasado = (pedido, item) => {
+  alterStateAtrasado = (tipo, pedido, item) => {
     const state = { ...this.state };
-    state.pedidos[pedido].itens[item].status = 'atrasado';
-    state.pedidos[pedido].statusPedido = 'atrasado';
+    switch (tipo) {
+      case 'item':
+        state.pedidos[pedido].itens[item].status = 'atrasado';
+        break;
+      case 'pedido':
+        state.pedidos[pedido].statusPedido = 'atrasado';
+        break;
+      default:
+        console.log('Deu muito ruim cara ;_:');
+    }
     this.setState(state);
   }
 
   alterStateConcluido = (Indexpedido, item) => {
     const state = { ...this.state };
 
-      state.pedidos[Indexpedido].itens[item].status = 'concluido';
-      state.pedidos[Indexpedido].statusPedido = 'realizado';
-      if (state.pedidos[Indexpedido].ItensConcluidos === 0) {
-        state.pedidos[Indexpedido].ItensConcluidos = 1;
-        this.setState(state);
-      } else {
-        state.pedidos[Indexpedido].ItensConcluidos = state.pedidos[Indexpedido].ItensConcluidos + 1;
-        this.setState(state);
-      }
-      this.verifyStatus(Indexpedido, item);
+    state.pedidos[Indexpedido].itens[item].status = 'concluido';
+
+    if (state.pedidos[Indexpedido].ItensConcluidos === 0) {
+      state.pedidos[Indexpedido].ItensConcluidos = 1;
+      this.setState(state);
+    } else {
+      state.pedidos[Indexpedido].ItensConcluidos = state.pedidos[Indexpedido].ItensConcluidos + 1;
+      this.setState(state);
+    }
+    this.verifyStatus(Indexpedido);
   }
 
-  verifyStatus = (Indexpedido, item) => {
+  verifyStatus = (Indexpedido) => {
+
     if (this.state.pedidos[Indexpedido].itens.length === this.state.pedidos[Indexpedido].ItensConcluidos) {
       this.state.pedidos[Indexpedido].statusPedido = 'concluido';
     }
+
+  }
+
+  counterLis = () => {
+    let cardActiveTablesCounter = document.querySelectorAll('div.cards.active-tables > div.list > ul > li').length;
+    let cardRightCounter = document.querySelectorAll('div.cards.right > div.list > ul > li').length;
+    let cardLateCounter = document.querySelectorAll('div.cards.late > div.list > ul > li').length;
+    let cardCompletedCounter = document.querySelectorAll('div.cards.completed > div.list > ul > li').length;
+
+    let cardActiveTablesElement = document.querySelector("#root > div > section > div.cards.active-tables > div.title > h3:nth-child(2)");
+    let cardRightElement = document.querySelector("#root > div > section > div.cards.right > div.title > h3:nth-child(2)");
+    let cardLateElement = document.querySelector("#root > div > section > div.cards.late > div.title > h3:nth-child(2)");
+    let cardCompletedElement = document.querySelector("#root > div > section > div.cards.completed > div.title > h3:nth-child(2)");
+
+    cardActiveTablesElement.innerText = cardActiveTablesCounter;
+    cardRightElement.innerHTML = cardRightCounter;
+    cardLateElement.innerHTML = cardLateCounter;
+    cardCompletedElement.innerHTML = cardCompletedCounter;
   }
 
   render() {
@@ -81,6 +121,7 @@ class App extends Component {
       alterStateAtrasado: this.alterStateAtrasado,
       alterStateConcluido: this.alterStateConcluido,
       alterStateTempoRestante: this.alterStateTempoRestante,
+      counterLis: this.counterLis
     }
 
     return (

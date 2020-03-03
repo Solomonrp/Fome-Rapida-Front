@@ -1,34 +1,122 @@
 import React, { Component } from 'react';
 import Item from '../Kitchen/Item';
+import AppContext from "../../context/AppContext";
+
 
 export default class PedidoRealizado extends Component {
+    state = {
+        timeLeft: this.context.state.pedidos[this.props.index].tempoTotalRestante.split(":"),
+    }
+
+    componentDidMount() {
+        this.changeTime();
+        this.context.counterLis();
+    }
+
+    changeTime = () => {
+        if (this.context.state.pedidos[this.props.index].statusPedido === 'realizado') {
+            let timeLeft = this.state.timeLeft;
+            this.interval = setInterval(() => {
+
+                if (timeLeft[1] > '00') {
+                    timeLeft[1] -= 1;
+                    timeLeft[1].toString().length < 2 ? timeLeft[1] = `0${timeLeft[1]}` : timeLeft[1] = timeLeft[1].toString();
+                    this.setState({ timeLeft });
+                    this.context.alterStateTempoRestante("pedido", this.props.index, '', this.state.timeLeft);
+                } else if (timeLeft[0] > '0') {
+                    timeLeft[0] -= 1;
+                    timeLeft[1] = 59;
+                    this.setState({ timeLeft });
+                    this.context.alterStateTempoRestante("pedido", this.props.index, '', this.state.timeLeft);
+                } else {
+                    clearInterval(this.interval);
+                    this.context.alterStateTempoRestante("pedido", this.props.index, '', this.state.timeLeft);
+                    this.context.alterStateAtrasado("pedido", this.props.index);
+                };
+            }, 1000);
+        }
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
+        this.context.counterLis();
+    }
+
+    viewRequest = (event) => {
+        let parent = event.target.parentNode.parentNode;
+        let request = parent.parentNode.children[1];
+        let icon = parent.children[3].children[0];
+
+        if (request.classList.value == 'pedido') {
+            request.classList.add('hide');
+            icon.classList.remove('icon-active');
+        } else {
+            request.classList.remove('hide');
+            icon.classList.add('icon-active');
+        }
+    }
 
     render() {
         return (
             <li className="item">
-                <div className="title-list">
-                    <h3>Pedido {this.props.pedido.numPedido}</h3>
-                    <h3>Mesa {this.props.pedido.mesa}</h3>
-                </div>
-                <div className="pedido">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th className="">Item</th>
-                                <th>Quantidade</th>
-                                <th>Tempo</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.props.pedido.itens.map((item, index) => {
-                               return <Item product={item} key={index} index={index} pedido={this.props.index}/>
-                            })}
-                        </tbody>
-                        <tfoot></tfoot>
-                    </table>
-                </div>
-            </li>
+                {
+                    this.context.state.pedidos[this.props.index].statusPedido === 'concluido' ?
+                        <React.Fragment>
+                            <div className="title-list">
+                                <h3>Pedido {this.props.pedido.numPedido}</h3>
+                                <h3>Mesa {this.props.pedido.mesa}</h3>
+                                <h3 title='Tempo Restante'>{this.state.timeLeft[0]}m:{this.state.timeLeft[1]}s</h3>
+                                <a onClick={this.viewRequest}><i className="fas fa-chevron-down"></i></a>
+                            </div>
+                            < div className="pedido hide">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th className="">Item</th>
+                                            <th>Quantidade</th>
+                                            <th>Tempo</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {this.props.pedido.itens.map((item, index) => {
+                                            return <Item product={item} key={index} index={index} pedido={this.props.index} />
+                                        })}
+                                    </tbody>
+                                    <tfoot></tfoot>
+                                </table>
+                            </div>
+                        </React.Fragment>
+                        :
+                        <React.Fragment>
+                            <div className="title-list">
+                                <h3>Pedido {this.props.pedido.numPedido}</h3>
+                                <h3>Mesa {this.props.pedido.mesa}</h3>
+                                <h3 title='Tempo Restante'>{this.state.timeLeft[0]}m:{this.state.timeLeft[1]}s</h3>
+                            </div>
+                            < div className="pedido">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th className="">Item</th>
+                                            <th>Quantidade</th>
+                                            <th>Tempo</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {this.props.pedido.itens.map((item, index) => {
+                                            return <Item product={item} key={index} index={index} pedido={this.props.index} />
+                                        })}
+                                    </tbody>
+                                    <tfoot></tfoot>
+                                </table>
+                            </div>
+                        </React.Fragment>
+                }
+            </li >
         )
     }
 }
+
+PedidoRealizado.contextType = AppContext;

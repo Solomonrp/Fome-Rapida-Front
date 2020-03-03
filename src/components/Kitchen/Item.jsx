@@ -3,10 +3,8 @@ import AppContext from "../../context/AppContext";
 
 export default class Item extends Component {
     state = {
-        timeInitial: this.props.product.tempo.split(':'),
         timeLeft: this.context.state.pedidos[this.props.pedido].itens[this.props.index].tempoRestante.split(":"),
     }
-
 
     componentDidMount() {
         this.changeTime();
@@ -21,41 +19,20 @@ export default class Item extends Component {
                     timeLeft[1] -= 1;
                     timeLeft[1].toString().length < 2 ? timeLeft[1] = `0${timeLeft[1]}` : timeLeft[1] = timeLeft[1].toString();
                     this.setState({ timeLeft });
-                    this.context.alterStateTempoRestante(this.props.pedido, this.props.index, this.state.timeLeft);
+                    this.context.alterStateTempoRestante("item", this.props.pedido, this.props.index, this.state.timeLeft);
                 } else if (timeLeft[0] > '0') {
                     timeLeft[0] -= 1;
                     timeLeft[1] = 59;
                     this.setState({ timeLeft });
-                    this.context.alterStateTempoRestante(this.props.pedido, this.props.index, this.state.timeLeft);
+                    this.context.alterStateTempoRestante("item", this.props.pedido, this.props.index, this.state.timeLeft);
                 } else {
                     clearInterval(this.interval);
-                    this.context.alterStateTempoRestante(this.props.pedido, this.props.index, this.state.timeLeft);
-                    this.context.alterStateAtrasado(this.props.pedido, this.props.index);
-                    // this.changeStatusAtrasado();
+                    this.context.alterStateTempoRestante("item", this.props.pedido, this.props.index, this.state.timeLeft);
+                    this.context.alterStateAtrasado("item", this.props.pedido, this.props.index);
                 };
             }, 1000);
         }
     }
-    // changeStatusAtrasado = () => {
-    //     let timeRestate = this.context.state.pedidos[this.props.pedido].itens[this.props.index].tempoRestante.split(':');
-    //     this.interval = setInterval(async () => {
-
-    //         if (timeRestate[1] < '60') {
-    //             let number = Number(timeRestate[1])
-    //             number += 1;
-    //             timeRestate[1] = number
-    //             await this.setState({ timeRestate });
-
-
-    //         } else if (timeRestate[0] < '60') {
-    //             timeRestate[0] += 1;
-    //             timeRestate[1] = 0;
-    //                await this.setState({ timeRestate });
-    //             await this.context.alterStateTempoRestante(this.props.pedido, this.props.index, this.state.timeRestate);
-
-    //         }
-    //     }, 1000);
-    // }
 
     componentWillUnmount() {
         clearInterval(this.interval);
@@ -78,7 +55,7 @@ export default class Item extends Component {
                                 <tr>
                                     <th>{this.props.product.product}</th>
                                     <th>{this.props.product.quantidade}</th>
-                                    <th>{this.state.timeLeft[0]}m:{this.state.timeLeft[1]}</th>
+                                    <th>{this.state.timeLeft[0]}m:{this.state.timeLeft[1]}s</th>
                                     <th><button onClick={this.alterStateConcluido} className='button-finished'><i className="fas fa-check"></i></button></th>
                                 </tr>
                             }
@@ -87,7 +64,7 @@ export default class Item extends Component {
                                 <tr className='trAtrasada'>
                                     <th>{this.props.product.product}</th>
                                     <th>{this.props.product.quantidade}</th>
-                                    <th>{this.state.timeLeft[0]}m:{this.state.timeLeft[1]}</th>
+                                    <th>{this.state.timeLeft[0]}m:{this.state.timeLeft[1]}s</th>
                                     <th><button onClick={this.alterStateConcluido} className='button-finished'><i className="fas fa-check"></i></button></th>
                                 </tr>
                             }
@@ -96,7 +73,7 @@ export default class Item extends Component {
                                 <tr className='trConcluida'>
                                     <th>{this.props.product.product}</th>
                                     <th>{this.props.product.quantidade}</th>
-                                    <th>{this.state.timeLeft[0]}m:{this.state.timeLeft[1]}</th>
+                                    <th>{this.state.timeLeft[0]}m:{this.state.timeLeft[1]}s</th>
                                     <th><i className="fas fa-check-double"></i></th>
                                 </tr>
                             }
