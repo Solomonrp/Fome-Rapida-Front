@@ -2,11 +2,22 @@
   .nav__wrapper {
     margin-bottom: 25px;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
   }
 
-  .nav__wrapper > a {
+  .nav__wrapper_icons > a {
     margin: 5px 10px;
+  }
+
+  .nav__burguer {
+    transition: margin .5s;
+  }
+
+  .nav__wrapper_icons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    transition: margin .5s;
   }
 
   .nav_car_img {
@@ -19,6 +30,27 @@
     width: 30px;
     height: 4px;
     margin: 5px;
+  }
+
+  .nav__list {
+    position: absolute;
+    text-decoration: none;
+    list-style-type: none;
+    background: white;
+    height: 532px;
+    /* margin-right: 15px; */
+    margin: 0 0 0 -120px ; 
+    transition: margin .5s;
+    z-index: 1;
+    padding: 8px;
+  }
+
+  .is_nav_open {
+    margin-left: 0px;
+  }
+
+  .is_burguer_side {
+    margin-left: 93px;
   }
 
 }

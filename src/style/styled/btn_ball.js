@@ -10,6 +10,7 @@ const Abtn = styled.a`
   width: 25px;
   height: 25px;
   border-radius: 15px;
+  cursor: pointer;
 `
 
 export default Abtn;
