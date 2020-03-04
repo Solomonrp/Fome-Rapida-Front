@@ -27,4 +27,8 @@
   .cart__opened {
     margin-bottom: 0px;
   }
+
+  .cart__items {
+    padding: 0px 5px;
+  }
 }

@@ -11,6 +11,7 @@ class Cart extends Component {
     cart: this.props.orders,
     items: 0,
     price: 0,
+    quantity: 0,
     step: false,
   }
 
@@ -23,6 +24,17 @@ class Cart extends Component {
     console.log(prevProps)
     console.log(prevState.orders.length)
     console.log(prevProps.items)
+    let quantity = prevState.orders.map( item => {
+      return item.quantity;
+    })
+    quantity = quantity.reduce((acc, total) => {
+      return acc + total;
+    })
+    if(prevProps.quantity !== quantity){
+      this.setState({
+        quantity: quantity
+      })
+    }
     if(prevProps.items !== prevState.orders.length) {
       this.setState({
         items: prevState.orders.length
@@ -34,7 +46,7 @@ class Cart extends Component {
   handleTeste = () => {
     console.log('orders',this.props.orders)
     const array = this.props.orders.map( item => {
-      return item.price;
+      return item.price * item.quantity;
     })
     
     console.log('priceeee',array);
@@ -122,17 +134,27 @@ class Cart extends Component {
         <div>
           <img src={cart} className="nav_car_img" />
         </div>
-        <Abtn>Pay</Abtn>
+        <Abtn onClick={() =>this.props.sendOrder()}>Pay</Abtn>
         <Abtn onClick={() => this.handleCart()} >+</Abtn>
         <div>
-          <a>R$ {this.state.price},00</a>
+          <a>R$ {this.props.state.price},00</a>
         </div>
         <div className="cart__closed">
           <ReactCSSTransitionGroup {...transitionOptions}> 
-          {
+          {/* {
             this.state.step &&
               this.props.orders.map((item, index) => {
                 return <div style={itemStyle} key={index}>{item.name} Q:{item.quantity} R${item.price},00</div>
+              })
+          } */}
+          {
+            this.state.step &&
+              this.props.state.cart.map((item, index) => {
+                return <div style={itemStyle} key={index}>
+                  <span class="cart__items">{item.name}</span> 
+                  <span class="cart__items">Q:{item.quantity}</span> 
+                  <span class="cart__items">R${item.price},00</span>
+                  </div>
               })
           }
           </ReactCSSTransitionGroup>

@@ -14,6 +14,7 @@ class Orders extends Component {
 
   changeCart = (id, quantity, price) => {
     this.props.handleCartChange(id, quantity, price);
+    this.props.handlePrice();
   }
 
   componentWillUnmount() {
@@ -29,13 +30,13 @@ class Orders extends Component {
             this.props.orders &&
             this.props.orders.map((food, index) => {
               // {...food}
-              return <Food changeCart={this.changeCart} idCart={index} category={food.category} img={food.img} name={food.name} price={food.price} time={food.time} key={index} />
+              return <Food quantity={food.quantity} changeCart={this.changeCart} idCart={index} category={food.category} img={food.img} name={food.name} price={food.price} time={food.time} key={index} />
             })
           }
           {/* <Food type='cart' /> */}
           {/* <Food type='cart' /> */}
         </div>
-        <Cart orders={this.props.orders}/>
+        <Cart sendOrder={this.props.sendOrder} state={this.props.state} orders={this.props.orders}/>
       </React.Fragment>
     )
   }

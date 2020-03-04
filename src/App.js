@@ -16,22 +16,25 @@ class App extends Component {
 
   state = {
     cart: [],
+    price: 0,
+    quantity: 0,
     cartQ: 0,
     valueOrder: 0,
     email: '',
     password: '',
     endpoint: 'http://localhost:5005/',
     socket: socketIOClient(`http://localhost:5000/`),
-    background: 33
+    background: 33,
+    response: ''
   }
 
   componentDidMount() {
     // const { endpoint } = this.state;
     // const socket = socketIOClient(endpoint);
-    this.state.socket.on("hello", data => this.setState({ response: data }));
+    const socket = this.state.socket;
+    // this.state.socket.on('up', data => this.setState({ response: data }));
+    socket.on('up', data => console.log('hello', data));
   }
-
-
 
   handleState = (value, state) => {
     this.setState({
@@ -101,11 +104,49 @@ class App extends Component {
   handleCart = (value) => {
     let carts = this.state.cart;
     carts.push(value);
+    const array = carts.map( item => {
+      return item.price * item.quantity;
+    })
+    const price = array.reduce((acc, total) => {
+      return acc + total;
+    })
+    const quanti = carts.map( quant => {
+      return quant.quantity
+    })
+    const quantity = quanti.reduce((acu, sum) => {
+      return acu + sum
+    })
     this.setState({
       cart: carts,
+      price: price,
+      quantity: quantity,
       cartQ: carts.length
     })
-    this.state.socket.emit("cart", value);
+  }
+  
+  sendOrder = () => {
+    this.state.socket.emit("cart", this.state.cart);
+    this.state.socket.on('order', data => console.log('hello', data));
+  }
+
+  handlePrice = () => {
+    let carts = this.state.cart;
+    const array = carts.map( item => {
+      return item.price * item.quantity;
+    })
+    const price = array.reduce((acc, total) => {
+      return acc + total;
+    })
+    const quanti = carts.map( quant => {
+      return quant.quantity
+    })
+    const quantity = quanti.reduce((acu, sum) => {
+      return acu + sum
+    })
+    this.setState({
+      price: price,
+      quantity: quantity,
+    })
   }
 
   handleBackground = (value) => {
@@ -145,7 +186,7 @@ class App extends Component {
             <Route exact path='/' render={() => <Login2 state={this.state} handleState={this.handleState} />} />
             <Route exact path='/category' render={() => <Category background={this.handleBackground} data={this.pizzas} />} />
             <Route path='/category/itens' render={(props) => <Itens {...props} data={this.pizzas} background={this.handleBackground} cartHandler={this.handleCart} />} />
-            <Route path='/orders' render={() => <Orders handleCartChange={this.handleCartChange} background={this.handleBackground} orders={this.state.cart} />} />
+            <Route path='/orders' render={() => <Orders sendOrder={this.sendOrder} handlePrice={this.handlePrice} handleCartChange={this.handleCartChange} state={this.state} background={this.handleBackground} orders={this.state.cart} />} />
             {/* <Route exact path='/' render={() => <Home changeState={this.changeState} api={this.callApi} data={this.state.allPlants} />} /> */}
           </Switch>
           {/* <Cart cart={this.state.cart} cartSize={this.state.cartQ} /> */}
