@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+
+/* @media only screen and (min-width: 768px) and (max-width: 1800px) { 
+  .login__wrapper {
+    background-size: 1157px 589px !important;
+  }
+  .login {
+    height: 700px !important;
+    margin: 2.79% 12.5% !important;
+  }
+} */
+
+.login__wrapper {
+  /* background-image: url('./imgs/assets/bg.jpg'); */
+  /* background-repeat: no-repeat; */
+  /* background-attachment: fixed; */
+  /* background-position: right;  */
+  /* background-position: 100% 58%; 
+  background-size: 1250px 650px; */ 
+}
+
+.login {
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 7px 3px rgba(0, 0, 0, 0.1);
+  max-width: 430px;
+  height: 100%;
+  margin: auto;
+  /* margin: 4.79% 12.5%; */
+}
+
+.login__box {
+  padding: 12% 7% ;
+}
+
+.login_tittle {
+  color: #4A4A4A;
+  font-family: Righteous;
+  font-size: 36px;
+  font-weight: 400;
+  letter-spacing: 14px;
+  line-height: 43px;
+  text-align: left;
+}
+
+.login__form {
+  margin: 10% 0px;
+}
+
+.showPassword__wrapper {
+  text-align-last: left;
+
+}
+
+.left {
+  text-align: left !important;
+}
+
+
+
+label {
+  color: #4A4A4A;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 19px;
+  text-align: left;
+}
+
+.label__text {
+  color: #4A4A4A;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  line-height: 19px;
+  text-align: left;
+}
+
+#root > div > div > div > form > div:nth-child(2) {
+  margin-top: 10px
+}
+
+div > input {
+  margin: 3% 0px;
+  border: 1px solid #4A4A4A;
+  width: 93%;
+  height: 55px;
+  /* color: #9B9B9B;
+  font-family: OpenSans;
+  font-size: 16px; OLhar antes de enviar
+  font-size: 26px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  line-height: 19px; */
+  color: #9B9B9B;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  line-height: 19px;
+  padding-left: 5.70%;
+}
+
+input[type='text'] {
+  /* background: url('../style/imgs/assets/mail.png') no-repeat right center; */
+  background-size: 20px 20px;
+  background-position: 95% 50%;
+}
+
+input[type='password'] {
+  /* background: url('../style/imgs/assets/lock.png') no-repeat right center; */
+  background-size: 20px 20px;
+  background-position: 95% 50%;
+}
+
+input[type='checkbox'] {
+  border: 1px solid #4A4A4A;
+  width: 15px;
+  height: 15px;
+  margin-right: 3%;
+}
+
+
+.login__problems {
+  margin-top: 10%;
+  margin-bottom: 12%;
+  text-align: left;
+}
+
+.login__problems__son {
+  color: #4A4A4A;
+  font-family: Open Sans;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 17px;
+}
+
+.or_wrapper { 
+  text-align: center;
+  display: flex;
+}
+
+.or {
+  color: #4A4A4A;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  line-height: 19px;
+  padding: 0px 20px;
+}
+
+.or__hr {
+  width: 150px;
+  background-color: #909090;
+  height: 1px;
+}
+
+.login__terms {
+  color: #4A4A4A;
+  font-family: Open Sans;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  line-height: 17px;
+}
+
+.login__google{
+  width: 20px;
+  height: 20px;
+  float: left;
+  padding-left: 20px;
+}

@@ -1,9 +1,25 @@
 body {
   margin: 0px;
   padding: 0px;
+  animation: colorchange 50s; 
+  -webkit-transition: all 1s ease-in;
+  -moz-transition: all 1s ease-in;
+  -o-transition: all 1s ease-in;
+  transition: all 1s ease-in;
 }
 
 .App {
   text-align: center;
 }
 
+.categoryBack {
+  background: linear-gradient(90deg, red 33%, white 33%);
+}
+
+.itensBack {
+  background: linear-gradient(90deg, red 66%, white 33%)
+}
+
+.orderBack {
+  background: linear-gradient(90deg, red 100%, white 33%)
+}
