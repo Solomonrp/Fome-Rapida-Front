@@ -7,7 +7,11 @@ header {
   width: 100vw;
   height: 60px;
   box-shadow: 0px 10px 26px 0px rgba(0,0,0,0.31);
-  background-color: #1c5f63;
+  background-color: #3c4350;
+}
+
+body{
+  background-color: #374055;
 }
 
 .container-header {
@@ -25,26 +29,50 @@ header {
 .main {
   display: grid;
   grid-template-columns: 5fr 5fr 5fr 5fr;
-  grid-column-gap: 10px;
+  grid-column-gap: 50px;
   width: 95vw;
   margin: 25px auto;
 }
 
-.cards {
-  border-radius: 15px;
-  height: 82vh;
-  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+.active-tables > .list {
+  height: 80vh;
+  background-color: #6eb6ee;
+  border-radius: 10px;
 }
-
+.right > .list {
+  height: 80vh;
+  background-color: #ecd971;
+  border-radius: 10px;
+}
+.late > .list {
+  height: 80vh;
+  background-color: #ed7072;
+  border-radius: 10px;
+}
+.completed > .list {
+  height: 80vh;
+  background-color: #7dda99;
+  border-radius: 10px;
+}
 .title {
-  box-shadow: 0px 10px 26px 0px rgba(0,0,0,0.11);
+  color: white;
   display: flex;
   justify-content: space-evenly;
 }
 
-.title-list {
+.title-list-tables {
+  background-color: white;
   display: flex;
   justify-content: space-around;
+  border-radius: 7px;
+}
+
+.title-list {
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
 }
 
 .pedido {
@@ -60,10 +88,9 @@ header {
 
 .list { 
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.404);
-  margin: 10px auto;
   height: auto;
   max-height: 95%;
-  width: 98%;
+  width: 100%;
   overflow-x: hidden;
   overflow-y: unset;
 }
@@ -73,18 +100,31 @@ header {
   height: auto;
   transition: all .3s ease-out;
   border: 1px solid rgba(0, 0, 0, 0.301);
-  margin-top: 10px;
+  border-radius: 10px;
+  margin-top: 3px;
+}
+
+ul.itens {
+  padding: 5px;
 }
 
 table {
   width:100%;
+  background-color: white;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
 }
+
 table, th {
   border-collapse: collapse;
 }
 
-table, tr {
+tr {
   border-bottom: 1px solid rgba(0, 0, 0, 0.733);
+}
+
+tbody > tr:last-of-type {
+  border-bottom: none;
 }
 
 .th {
@@ -132,4 +172,5 @@ table, tr {
 
 .fa-user-cog {
   font-size: 25px;
+  color: #39719b;
 }

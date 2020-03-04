@@ -23,7 +23,7 @@ export default class Kitchen extends Component {
                             </header>
 
                             <section className="main">
-                                <div className="cards active-tables" style={{ border: "2px solid #fafa054f" }}>
+                                <div className="cards active-tables">
                                     <div className="title">
                                         <h3>Mesas Ativas</h3>
                                         <h3 title="Quantidade de pedidos">00</h3>
@@ -33,7 +33,7 @@ export default class Kitchen extends Component {
                                             {context.state.realizando.map((pedido, index) => {
                                                 return (
                                                     <li key={index} className="item">
-                                                        <div className="title-list" >
+                                                        <div className="title-list-tables" >
                                                             <h3>Mesa {pedido.mesa}</h3>
                                                         </div>
                                                     </li>)
@@ -41,7 +41,7 @@ export default class Kitchen extends Component {
                                         </ul>
                                     </div>
                                 </div>
-                                <div className="cards right" style={{ border: "2px solid #00800069" }}>
+                                <div className="cards right">
                                     <div className="title">
                                         <h3>Realizados</h3>
                                         <h3 title="Quantidade de pedidos">00</h3>
@@ -54,7 +54,7 @@ export default class Kitchen extends Component {
                                         </ul>
                                     </div>
                                 </div>
-                                <div className="cards late" style={{ border: "2px solid #ff000063" }}>
+                                <div className="cards late">
                                     <div className="title">
                                         <h3>Atrasados </h3>
                                         <h3>00</h3>
@@ -67,7 +67,7 @@ export default class Kitchen extends Component {
                                         </ul>
                                     </div>
                                 </div>
-                                <div className="cards completed" style={{ border: "2px solid #0000ff63" }}>
+                                <div className="cards completed">
                                     <div className="title">
                                         <h3>Concluidos </h3>
                                         <h3>00</h3>
