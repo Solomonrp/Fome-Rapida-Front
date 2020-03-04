@@ -1,0 +1,893 @@
+webpackHotUpdate("main",{
+
+/***/ "./src/components/Kitchen/Dashboard.jsx":
+/*!**********************************************!*\
+  !*** ./src/components/Kitchen/Dashboard.jsx ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Kitchen; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./styles.css */ "./src/components/Kitchen/styles.css");
+/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_styles_css__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "/mnt/c/Users/Usuario/Desktop/fomeRapida/Fome-Rapida-Front/src/components/Kitchen/Dashboard.jsx";
+
+
+class Kitchen extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+  constructor(...args) {
+    super(...args);
+
+    this.viewRequest = event => {
+      let parent = event.target.parentNode.parentNode;
+      let request = parent.children[1];
+
+      if (request.classList == 'pedido') {
+        request.classList.add('hide');
+      } else {
+        request.classList.remove('hide');
+      }
+    };
+  }
+
+  render() {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 19
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 20
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "container-header",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 21
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 22
+      },
+      __self: this
+    }, "PEDIDOS COZINHA \"NOME RESTAURANTE\""), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      href: "#",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 23
+      },
+      __self: this
+    }, "LOGO VAI AQUI"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+      className: "main",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 27
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "cards",
+      style: {
+        border: "2px solid #fafa054f"
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 28
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "title",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 29
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 30
+      },
+      __self: this
+    }, "Realizando \uD83D\uDE0B"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 31
+      },
+      __self: this
+    }, "00")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "list",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 33
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      className: "itens",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 34
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      className: "item",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 35
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "title-list",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 36
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 37
+      },
+      __self: this
+    }, "Pedido 01"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 38
+      },
+      __self: this
+    }, "Mesa 02"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      onClick: this.viewRequest,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 39
+      },
+      __self: this
+    }, "+")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "pedido hide",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 41
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 42
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 43
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      className: "th",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 44
+      },
+      __self: this
+    }, "Item"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 45
+      },
+      __self: this
+    }, "Quantidade")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 47
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 48
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 49
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 51
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 52
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 53
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 55
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 56
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 57
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 59
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 60
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 61
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 63
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 64
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 65
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 67
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 68
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 69
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 71
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 72
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 73
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 75
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 76
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 77
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 79
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 80
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 81
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 83
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 84
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 85
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 87
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 88
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 89
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 91
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 92
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 93
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 95
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 96
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 97
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 99
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 100
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 101
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 103
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 104
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 105
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 107
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 108
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 109
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 111
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 112
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 113
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 115
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 116
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 117
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 119
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 120
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 121
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 123
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 124
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 125
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 127
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 128
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 129
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 131
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 132
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 133
+      },
+      __self: this
+    }, "5"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      className: "item",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 138
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "title-list",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 139
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 140
+      },
+      __self: this
+    }, "Pedido 02"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 141
+      },
+      __self: this
+    }, "Mesa 05"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      onClick: this.viewRequest,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 142
+      },
+      __self: this
+    }, "+")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "pedido hide",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 144
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 145
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 146
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 147
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 148
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      className: "th",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 149
+      },
+      __self: this
+    }, "Item"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 150
+      },
+      __self: this
+    }, "Quantidade")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 152
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 153
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 154
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 156
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 157
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 158
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 160
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 161
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 162
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 164
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 165
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 166
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 168
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 169
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 170
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 172
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 173
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 174
+      },
+      __self: this
+    }, "5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 176
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 177
+      },
+      __self: this
+    }, "Sua irma"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 178
+      },
+      __self: this
+    }, "5")))))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "cards",
+      style: {
+        border: "2px solid #00800069"
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 189
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "title",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 190
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 191
+      },
+      __self: this
+    }, "Realizados \uD83D\uDE0D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 192
+      },
+      __self: this
+    }, "00")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "list",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 194
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("progress", {
+      value: "50",
+      max: "100",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 195
+      },
+      __self: this
+    }, "70 %"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "cards",
+      style: {
+        border: "2px solid #ff000063"
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 198
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "title",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 199
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 200
+      },
+      __self: this
+    }, "Atrasados \uD83D\uDE13"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 201
+      },
+      __self: this
+    }, "00"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "cards",
+      style: {
+        border: "2px solid #0000ff63"
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 204
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "title",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 205
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 206
+      },
+      __self: this
+    }, "Concluidos \uD83D\uDE1D"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 207
+      },
+      __self: this
+    }, "00")))));
+  }
+
+}
+
+/***/ })
+
+})
+//# sourceMappingURL=main.1d9758694501735839db.hot-update.js.map
