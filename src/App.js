@@ -29,7 +29,28 @@ class App extends Component {
     endpoint: 'http://localhost:5005/',
     socket: socketIOClient(`http://localhost:5000/`),
     background: 33,
-    response: ''
+    response: '',
+    realizando: [{ numPedido: 50, mesa: 10, item: "teste", quantidade: 50 }, { numPedido: 70, mesa: 15, item: "teste", quantidade: 80 }, { numPedido: 90, mesa: 18, item: "teste", quantidade: 90 }, { numPedido: 49, mesa: 50, item: "teste", quantidade: 500 }],
+    pedidos: [
+      {
+        numPedido: 50,
+        mesa: 10,
+        itens: [{ product: "teste", quantidade: 50, tempo: "1:15", tempoRestante: "1:15", status: 'realizando' }, { product: "teste", quantidade: 50, tempo: "1:15", tempoRestante: "1:15", status: 'realizando' }, { product: "teste", quantidade: 50, tempo: "0:05", tempoRestante: "0:05", status: 'realizando' }],
+        ItensConcluidos: 0,
+        statusPedido: 'realizado',
+        tempoTotalInicial: '1:15',
+        tempoTotalRestante: '1:15',
+      },
+
+      {
+        numPedido: 56,
+        mesa: 19,
+        itens: [{ product: "teste", quantidade: 80, tempo: "0:03", tempoRestante: "0:03", status: 'realizando' }, { product: "teste", quantidade: 50, tempo: "0:09", tempoRestante: "0:09", status: 'realizando' }],
+        ItensConcluidos: 0,
+        statusPedido: 'realizado',
+        tempoTotalInicial: '0:09',
+        tempoTotalRestante: '0:09',
+      }],
   }
 
   componentDidMount() {
@@ -105,40 +126,17 @@ class App extends Component {
   },
   ]
 
+
   handleCart = (value) => {
-    realizando: [{ numPedido: 50, mesa: 10, item: "teste", quantidade: 50 }, { numPedido: 70, mesa: 15, item: "teste", quantidade: 80 }, { numPedido: 90, mesa: 18, item: "teste", quantidade: 90 }, { numPedido: 49, mesa: 50, item: "teste", quantidade: 500 }],
-    pedidos: [
-      {
-        numPedido: 50,
-        mesa: 10,
-        itens: [{ product: "teste", quantidade: 50, tempo: "1:15", tempoRestante: "1:15", status: 'realizando' }, { product: "teste", quantidade: 50, tempo: "1:15", tempoRestante: "1:15", status: 'realizando' }, { product: "teste", quantidade: 50, tempo: "0:05", tempoRestante: "0:05", status: 'realizando' }],
-        ItensConcluidos: 0,
-        statusPedido: 'realizado',
-        tempoTotalInicial: '1:15',
-        tempoTotalRestante: '1:15',
-      },
-
-      {
-        numPedido: 56,
-        mesa: 19,
-        itens: [{ product: "teste", quantidade: 80, tempo: "0:03", tempoRestante: "0:03", status: 'realizando' }, { product: "teste", quantidade: 50, tempo: "0:09", tempoRestante: "0:09", status: 'realizando' }],
-        ItensConcluidos: 0,
-        statusPedido: 'realizado',
-        tempoTotalInicial: '0:09',
-        tempoTotalRestante: '0:09',
-      }],
-  }
-
-  handleCart(value) {
     let carts = this.state.cart;
     carts.push(value);
-    const array = carts.map( item => {
+    const array = carts.map(item => {
       return item.price * item.quantity;
     })
     const price = array.reduce((acc, total) => {
       return acc + total;
     })
-    const quanti = carts.map( quant => {
+    const quanti = carts.map(quant => {
       return quant.quantity
     })
     const quantity = quanti.reduce((acu, sum) => {
@@ -151,7 +149,7 @@ class App extends Component {
       cartQ: carts.length
     })
   }
-  
+
   sendOrder = () => {
     this.state.socket.emit("cart", this.state.cart);
     this.state.socket.on('order', data => console.log('hello', data));
@@ -159,13 +157,13 @@ class App extends Component {
 
   handlePrice = () => {
     let carts = this.state.cart;
-    const array = carts.map( item => {
+    const array = carts.map(item => {
       return item.price * item.quantity;
     })
     const price = array.reduce((acc, total) => {
       return acc + total;
     })
-    const quanti = carts.map( quant => {
+    const quanti = carts.map(quant => {
       return quant.quantity
     })
     const quantity = quanti.reduce((acu, sum) => {
@@ -284,8 +282,8 @@ class App extends Component {
     }
 
     return (
-      <div>
-        <div className="App" style={background}>
+      <div className="App" style={background}>
+        <AppContext.Provider value={contextValues}>
           {/* <Home /> */}
           {/* <Nav cart={this.state.cart} /> */}
           <Switch>
@@ -298,7 +296,7 @@ class App extends Component {
             {/* <Route exact path='/' render={() => <Home changeState={this.changeState} api={this.callApi} data={this.state.allPlants} />} /> */}
           </Switch>
           {/* <Cart cart={this.state.cart} cartSize={this.state.cartQ} /> */}
-        </div>
+        </AppContext.Provider>
       </div>
     );
   }
