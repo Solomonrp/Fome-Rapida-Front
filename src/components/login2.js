@@ -39,6 +39,9 @@ export const Login2 = (props) => {
     try {
       const result = await axios.post('http://localhost:5000/user-authentication', data)
       console.log(result);
+      const socket = this.props.state.socket;
+      socket.emit('log', email);
+      // log
     } catch (error) {
       console.log(error);
     }
@@ -71,7 +74,7 @@ export const Login2 = (props) => {
         console.log(res)
       })
       .catch(error => {
-        console.log(error)
+        console.log('error',error)
       })
   }
 
