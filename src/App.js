@@ -15,6 +15,7 @@ import './App.css';
 import './style/home.css'
 import testeImg from './style/img/category/foodiesfeed.com_neapolitan-pizza-margherita.jpg'
 import Kitchen from './components/Kitchen/Dashboard';
+import Admin from './components/Kitchen/Admin';
 
 class App extends Component {
 
@@ -269,10 +270,6 @@ class App extends Component {
   }
 
   render() {
-    const background = {
-      // 'background': `linear-gradient(90deg, red ${this.state.background}%, white 33%)`,
-      // 'height': '100vh'
-    }
     const contextValues = {
       state: this.state,
       alterStateAtrasado: this.alterStateAtrasado,
@@ -293,6 +290,7 @@ class App extends Component {
             <Route path='/category/itens' render={(props) => <Itens {...props} data={this.pizzas} background={this.handleBackground} cartHandler={this.handleCart} />} />
             <Route path='/orders' render={() => <Orders sendOrder={this.sendOrder} handlePrice={this.handlePrice} handleCartChange={this.handleCartChange} state={this.state} background={this.handleBackground} orders={this.state.cart} />} />
             <Route exact path='/Kitchen' component={Kitchen} />
+            <Route exact path='/Kitchen/admin' component={Admin} />
             {/* <Route exact path='/' render={() => <Home changeState={this.changeState} api={this.callApi} data={this.state.allPlants} />} /> */}
           </Switch>
           {/* <Cart cart={this.state.cart} cartSize={this.state.cartQ} /> */}
