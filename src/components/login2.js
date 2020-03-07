@@ -1,24 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import socketIOClient from 'socket.io-client';
 import Button from './button';
 import '../style/login.css';
 import axios from 'axios';
+import querySearch from 'stringquery';
 
 
 
 export const Login2 = (props) => {
 
+  useEffect(() => {
+    getTable();
+  }, [])
+
+  useEffect(() => {
+    // const socket = props.state.socket;
+    // socket.on('table', data => {
+    //   console.log('table', data.mesa)
+    //   if(data.mesa){
+    //     localStorage.setItem("table", data.mesa)
+    //   }
+    //   else {
+    //     localStorage.setItem("table", 'bancada')
+    //   }
+    // }
+    // );
+  })
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState('');
+  const [table, setTable] = useState(0);
+
+  const getTable = () => {
+    let query = querySearch(window.location.search)
+    console.log('table',query)
+    if(query){
+      localStorage.setItem("table", query.mesa)
+    }
+    else {
+      localStorage.setItem("table", 'bancada')
+    }
+    setTable(query)
+    console.log('localstorate',localStorage.getItem("table"));
+
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
   }
 
+
+
   const subscribe = async () => {
     console.log('subs click');
-    const data = { 
+    const data = {
       email: email,
       password: password
     }
@@ -54,7 +90,6 @@ export const Login2 = (props) => {
     })
   }
 
-
   // const handleChange = (event) => {
   //   this.props.handleState(event.name, event.value);
   // }
@@ -74,7 +109,7 @@ export const Login2 = (props) => {
         console.log(res)
       })
       .catch(error => {
-        console.log('error',error)
+        console.log('error', error)
       })
   }
 

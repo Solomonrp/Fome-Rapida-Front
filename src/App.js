@@ -21,6 +21,7 @@ class App extends Component {
 
   state = {
     cart: [],
+    stage: 'buying',
     price: 0,
     quantity: 0,
     cartQ: 0,
@@ -31,6 +32,7 @@ class App extends Component {
     socket: socketIOClient(`http://localhost:5000/`),
     background: 33,
     response: '',
+    table: 'bancada',
     realizando: [{ numPedido: 50, mesa: 10, item: "teste", quantidade: 50 }, { numPedido: 70, mesa: 15, item: "teste", quantidade: 80 }, { numPedido: 90, mesa: 18, item: "teste", quantidade: 90 }, { numPedido: 49, mesa: 50, item: "teste", quantidade: 500 }],
     pedidos: [
       {
@@ -373,7 +375,7 @@ class App extends Component {
           {/* <Nav cart={this.state.cart} /> */}
           <Switch>
             <Route exact path='/' render={() => <Login2 state={this.state} handleState={this.handleState} />} />
-            <Route exact path='/category' render={() => <Category background={this.handleBackground} data={this.pizzas} />} />
+            <Route exact path='/category' render={() => <Category socket={this.state.socket} background={this.handleBackground} data={this.pizzas} />} />
             <Route path='/category/itens' render={(props) => <Itens {...props} data={this.pizzas} background={this.handleBackground} cartHandler={this.handleCart} />} />
             <Route path='/orders' render={() => <Orders handlePay = {this.handlePay} sendOrder={this.sendOrder} handlePrice={this.handlePrice} handleCartChange={this.handleCartChange} state={this.state} background={this.handleBackground} orders={this.state.cart} />} />
             <Route exact path='/Kitchen' component={Kitchen} />

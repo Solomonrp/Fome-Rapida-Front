@@ -19,6 +19,7 @@
     "react-transition-group": "^4.3.0",
     "semantic-ui-react": "^0.88.2",
     "socket.io-client": "^2.3.0",
+    "stringquery": "^1.0.8",
     "styled": "^1.0.0",
     "styled-components": "^5.0.1"
   },
