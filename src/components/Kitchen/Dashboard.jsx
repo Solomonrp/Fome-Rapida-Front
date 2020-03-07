@@ -5,8 +5,27 @@ import PedidoRealizado from "../Kitchen/PedidoRealizado";
 
 export default class Kitchen extends Component {
 
-    componentDidMount () {
+    state = {
+        orders: '',
+        tables: []
+    }
+    
+    componentDidMount() {
         this.context.counterLis();
+        const socket = this.context.state.socket;
+        socket.on('orders', orders => {
+            console.log('Orders', orders)
+            this.setState({
+                orders: orders
+            })
+        });
+        socket.on('table', table => {
+            console.log('table', table);
+            this.state.tables.push(table.mesa);
+        })
+        socket.on('offline', userOff => {
+            console.log(userOff);
+        } )
     }
 
     render() {

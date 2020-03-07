@@ -107,6 +107,11 @@ class Cart extends Component {
 
   }
 
+  handlePayM = () => {
+    this.props.handlePay();
+    this.props.sendOrder();
+  }
+
   render() {
     const styles = {
       // "margin-bottom": "0px"
@@ -134,7 +139,7 @@ class Cart extends Component {
         <div>
           <img src={cart} className="nav_car_img" />
         </div>
-        <Abtn onClick={() =>this.props.sendOrder()}>Pay</Abtn>
+        <Abtn onClick={() =>this.handlePayM()}>Pay</Abtn>
         <Abtn onClick={() => this.handleCart()} >+</Abtn>
         <div>
           <a>R$ {this.props.state.price},00</a>

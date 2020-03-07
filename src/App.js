@@ -16,11 +16,13 @@ import './style/home.css'
 import testeImg from './style/img/category/foodiesfeed.com_neapolitan-pizza-margherita.jpg'
 import Kitchen from './components/Kitchen/Dashboard';
 import Admin from './components/Kitchen/Admin';
+import pagarme from 'pagarme/browser'
 
 class App extends Component {
 
   state = {
     cart: [],
+    stage: 'buying',
     price: 0,
     quantity: 0,
     cartQ: 0,
@@ -31,6 +33,7 @@ class App extends Component {
     socket: socketIOClient(`http://localhost:5000/`),
     background: 33,
     response: '',
+    table: 'bancada',
     realizando: [{ numPedido: 50, mesa: 10, item: "teste", quantidade: 50 }, { numPedido: 70, mesa: 15, item: "teste", quantidade: 80 }, { numPedido: 90, mesa: 18, item: "teste", quantidade: 90 }, { numPedido: 49, mesa: 50, item: "teste", quantidade: 500 }],
     pedidos: [
       {
@@ -55,10 +58,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // const { endpoint } = this.state;
-    // const socket = socketIOClient(endpoint);
     const socket = this.state.socket;
-    // this.state.socket.on('up', data => this.setState({ response: data }));
     socket.on('up', data => console.log('hello', data));
   }
 
@@ -66,6 +66,76 @@ class App extends Component {
     this.setState({
       [value]: state
     })
+  }
+
+  handlePay = () => {
+    pagarme.client.connect({ api_key: 'ak_test_VXhFAuI7HLxrh44uOJcAvlx3FkX5sf' })
+  .then(client => client.transactions.create({
+  "amount": 21000,
+    "card_number": "4111111111111111",
+    "card_cvv": "123",
+    "card_expiration_date": "0922",
+    "card_holder_name": "Morpheus Fishburne",
+    "customer": {
+      "external_id": "#3311",
+      "name": "Morpheus Fishburne",
+      "type": "individual",
+      "country": "br",
+      "email": "mopheus@nabucodonozor.com",
+      "documents": [
+        {
+          "type": "cpf",
+          "number": "30621143049"
+        }
+      ],
+      "phone_numbers": ["+5511999998888", "+5511888889999"],
+      "birthday": "1965-01-01"
+    },
+    "billing": {
+      "name": "Trinity Moss",
+      "address": {
+        "country": "br",
+        "state": "sp",
+        "city": "Cotia",
+        "neighborhood": "Rio Cotia",
+        "street": "Rua Matrix",
+        "street_number": "9999",
+        "zipcode": "06714360"
+      }
+    },
+    "shipping": {
+      "name": "Neo Reeves",
+      "fee": 1000,
+      "delivery_date": "2000-12-21",  
+      "expedited": true,
+      "address": {
+        "country": "br",
+        "state": "sp",
+        "city": "Cotia",
+        "neighborhood": "Rio Cotia",
+        "street": "Rua Matrix",
+        "street_number": "9999",
+        "zipcode": "06714360"
+      }
+    },
+    "items": [
+      {
+        "id": "r123",
+        "title": "Red pill",
+        "unit_price": 10000,
+        "quantity": 1,
+        "tangible": true
+      },
+      {
+        "id": "b123",
+        "title": "Blue pill",
+        "unit_price": 10000,
+        "quantity": 1,
+        "tangible": true
+      }
+    ]
+  }))
+  .then(transaction => console.log(transaction))
   }
 
   pizzas = [{
@@ -269,13 +339,17 @@ class App extends Component {
     cardCompletedElement.innerHTML = cardCompletedCounter;
   }
 
+
   render() {
+    const background = {
+      
+    }
     const contextValues = {
       state: this.state,
       alterStateAtrasado: this.alterStateAtrasado,
       alterStateConcluido: this.alterStateConcluido,
       alterStateTempoRestante: this.alterStateTempoRestante,
-      counterLis: this.counterLis
+      counterLis: this.counterLis,
     }
 
     return (
@@ -284,11 +358,10 @@ class App extends Component {
           {/* <Home /> */}
           {/* <Nav cart={this.state.cart} /> */}
           <Switch>
-
             <Route exact path='/' render={() => <Login2 state={this.state} handleState={this.handleState} />} />
-            <Route exact path='/category' render={() => <Category background={this.handleBackground} data={this.pizzas} />} />
+            <Route exact path='/category' render={() => <Category socket={this.state.socket} background={this.handleBackground} data={this.pizzas} />} />
             <Route path='/category/itens' render={(props) => <Itens {...props} data={this.pizzas} background={this.handleBackground} cartHandler={this.handleCart} />} />
-            <Route path='/orders' render={() => <Orders sendOrder={this.sendOrder} handlePrice={this.handlePrice} handleCartChange={this.handleCartChange} state={this.state} background={this.handleBackground} orders={this.state.cart} />} />
+            <Route path='/orders' render={() => <Orders handlePay = {this.handlePay} sendOrder={this.sendOrder} handlePrice={this.handlePrice} handleCartChange={this.handleCartChange} state={this.state} background={this.handleBackground} orders={this.state.cart} />} />
             <Route exact path='/Kitchen' component={Kitchen} />
             <Route exact path='/Kitchen/admin' component={Admin} />
             {/* <Route exact path='/' render={() => <Home changeState={this.changeState} api={this.callApi} data={this.state.allPlants} />} /> */}
