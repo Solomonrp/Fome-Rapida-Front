@@ -45,11 +45,7 @@ export const Pedidos = (props) => {
           return <Food quantity={food.quantity} idCart={index} img={food.img} name={food.name} time={food.time} key={index} />
         })
         :
-<<<<<<< HEAD
         <span>Não temos nenhum pedido para exibir</span>
-=======
-        <a>Não temos nenhum pedido para exibir</a>
->>>>>>> c6b1483c1935b949162ef5b3278d7cfbb54879c4
       }
     </div>
   </React.Fragment>
