@@ -7,16 +7,16 @@ import './style/home.css';
 import Category from './components/category';
 import Itens from './components/itens';
 import Orders from './components/orders';
-import Nav from './components/nav';
-import Cart from './components/cart';
-import Login from './components/login';
+import { Pedidos } from './components/pedidos';
 import Login2 from './components/login2';
 import './App.css';
 import './style/home.css'
 import testeImg from './style/img/category/foodiesfeed.com_neapolitan-pizza-margherita.jpg'
 import Kitchen from './components/Kitchen/Dashboard';
+import Payment from './components/payment';
+import Order from './components/ordersMenu'
+import pagarme from 'pagarme/browser';
 import Admin from './components/Kitchen/Admin';
-import pagarme from 'pagarme/browser'
 
 class App extends Component {
 
@@ -30,7 +30,7 @@ class App extends Component {
     email: '',
     password: '',
     endpoint: 'http://localhost:5005/',
-    socket: socketIOClient(`http://localhost:5000/`),
+    socket: socketIOClient(process.env.REACT_APP_BACK_END),
     background: 33,
     response: '',
     table: 'bancada',
@@ -49,75 +49,72 @@ class App extends Component {
 
   handlePay = () => {
     pagarme.client.connect({ api_key: 'ak_test_VXhFAuI7HLxrh44uOJcAvlx3FkX5sf' })
-  .then(client => client.transactions.create({
-  "amount": 21000,
-    "card_number": "4111111111111111",
-    "card_cvv": "123",
-    "card_expiration_date": "0922",
-    "card_holder_name": "Morpheus Fishburne",
-    "customer": {
-      "external_id": "#3311",
-      "name": "Morpheus Fishburne",
-      "type": "individual",
-      "country": "br",
-      "email": "mopheus@nabucodonozor.com",
-      "documents": [
-        {
-          "type": "cpf",
-          "number": "30621143049"
-        }
-      ],
-      "phone_numbers": ["+5511999998888", "+5511888889999"],
-      "birthday": "1965-01-01"
-    },
-    "billing": {
-      "name": "Trinity Moss",
-      "address": {
-        "country": "br",
-        "state": "sp",
-        "city": "Cotia",
-        "neighborhood": "Rio Cotia",
-        "street": "Rua Matrix",
-        "street_number": "9999",
-        "zipcode": "06714360"
-      }
-    },
-    "shipping": {
-      "name": "Neo Reeves",
-      "fee": 1000,
-      "delivery_date": "2000-12-21",  
-      "expedited": true,
-      "address": {
-        "country": "br",
-        "state": "sp",
-        "city": "Cotia",
-        "neighborhood": "Rio Cotia",
-        "street": "Rua Matrix",
-        "street_number": "9999",
-        "zipcode": "06714360"
-      }
-    },
-    "items": [
-      {
-        "id": "r123",
-        "title": "Red pill",
-        "unit_price": 10000,
-        "quantity": 1,
-        "tangible": true
-      },
-      {
-        "id": "b123",
-        "title": "Blue pill",
-        "unit_price": 10000,
-        "quantity": 1,
-        "tangible": true
-      }
-    ]
-  }))
-  .then(transaction => {
-     console.log(transaction);
-    this.state.socket.emit('disconnect');
-    })
+      .then(client => client.transactions.create({
+        "amount": 21000,
+        "card_number": "4111111111111111",
+        "card_cvv": "123",
+        "card_expiration_date": "0922",
+        "card_holder_name": "Morpheus Fishburne",
+        "customer": {
+          "external_id": "#3311",
+          "name": "Morpheus Fishburne",
+          "type": "individual",
+          "country": "br",
+          "email": "mopheus@nabucodonozor.com",
+          "documents": [
+            {
+              "type": "cpf",
+              "number": "30621143049"
+            }
+          ],
+          "phone_numbers": ["+5511999998888", "+5511888889999"],
+          "birthday": "1965-01-01"
+        },
+        "billing": {
+          "name": "Trinity Moss",
+          "address": {
+            "country": "br",
+            "state": "sp",
+            "city": "Cotia",
+            "neighborhood": "Rio Cotia",
+            "street": "Rua Matrix",
+            "street_number": "9999",
+            "zipcode": "06714360"
+          }
+        },
+        "shipping": {
+          "name": "Neo Reeves",
+          "fee": 1000,
+          "delivery_date": "2000-12-21",
+          "expedited": true,
+          "address": {
+            "country": "br",
+            "state": "sp",
+            "city": "Cotia",
+            "neighborhood": "Rio Cotia",
+            "street": "Rua Matrix",
+            "street_number": "9999",
+            "zipcode": "06714360"
+          }
+        },
+        "items": [
+          {
+            "id": "r123",
+            "title": "Red pill",
+            "unit_price": 10000,
+            "quantity": 1,
+            "tangible": true
+          },
+          {
+            "id": "b123",
+            "title": "Blue pill",
+            "unit_price": 10000,
+            "quantity": 1,
+            "tangible": true
+          }
+        ]
+      }))
+      .then(transaction => console.log(transaction))
   }
   pizzas = [{
     img: testeImg,
@@ -205,8 +202,16 @@ class App extends Component {
   }
 
   sendOrder = () => {
-    this.state.socket.emit("cart", this.state.cart);
-    this.state.socket.on('order', data => console.log('hello', data));
+    let shop = {
+      id: localStorage.getItem("id"),
+      cart: this.state.cart,
+      mesa: localStorage.getItem("table")
+    }
+    this.state.socket.emit("cart", shop);
+    this.state.socket.on('orders', data => {
+      console.log('helloooooooooo', data)
+      localStorage.setItem("orderId", data._id);
+    });
   }
 
   handlePrice = () => {
@@ -249,6 +254,7 @@ class App extends Component {
       time: carts[position].time,
       handleCart: carts[position].handleCart
     };
+    localStorage.setItem("cart", carts)
     console.log('alterado', carts)
   }
 
@@ -267,6 +273,12 @@ class App extends Component {
     cardRightElement.innerHTML = cardRightCounter;
     cardLateElement.innerHTML = cardLateCounter;
     cardCompletedElement.innerHTML = cardCompletedCounter;
+  }
+
+  handleStage = () => {
+    this.setState({
+      stage: "pago"
+    })
   }
 
 
@@ -288,7 +300,10 @@ class App extends Component {
             <Route exact path='/' render={() => <Login2 state={this.state} handleState={this.handleState} />} />
             <Route exact path='/category' render={() => <Category socket={this.state.socket} background={this.handleBackground} data={this.pizzas} />} />
             <Route path='/category/itens' render={(props) => <Itens {...props} data={this.pizzas} background={this.handleBackground} cartHandler={this.handleCart} />} />
-            <Route path='/orders' render={() => <Orders handlePay = {this.handlePay} sendOrder={this.sendOrder} handlePrice={this.handlePrice} handleCartChange={this.handleCartChange} state={this.state} background={this.handleBackground} orders={this.state.cart} />} />
+            <Route path='/orders' render={() => <Orders handlePay={this.handlePay} sendOrder={this.sendOrder} handlePrice={this.handlePrice} handleCartChange={this.handleCartChange} state={this.state} background={this.handleBackground} orders={this.state.cart} />} />
+            <Route path='/pagamento' render={() => <Payment sendOrder={this.sendOrder} handlePay={this.handlePay} handleStage={this.handleStage} state={this.state} />} />
+            <Route path='/pedidos' render={() => <Pedidos state={this.state} />} />
+            <Route path='/pagos' render={()=> <Order />} /> 
             <Route exact path='/Kitchen' component={Kitchen} />
             <Route exact path='/Kitchen/admin' component={Admin} />
             {/* <Route exact path='/' render={() => <Home changeState={this.changeState} api={this.callApi} data={this.state.allPlants} />} /> */}

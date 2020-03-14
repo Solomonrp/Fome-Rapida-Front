@@ -63,7 +63,7 @@ export default class PedidoRealizado extends Component {
                     this.props.pedido.statusPedido === 'concluido' ?
                         <React.Fragment>
                             <div className="title-list">
-                                <h3>Pedido {this.props.pedido.numPedido}</h3>
+                                <h3>Pedido {this.props.pedido.numberOrder}</h3>
                                 <h3>Mesa {this.props.pedido.mesa}</h3>
                                 <h3 title='Tempo Restante'>{this.state.timeLeft[0]}m:{this.state.timeLeft[1]}s</h3>
                                 <a onClick={this.viewRequest}><i className="fas fa-chevron-down"></i></a>
