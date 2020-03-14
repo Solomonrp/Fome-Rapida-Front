@@ -9,7 +9,7 @@ export default class Kitchen extends Component {
         orders: '',
         tables: []
     }
-
+    
     componentDidMount() {
         this.context.counterLis();
         const socket = this.context.state.socket;
@@ -26,7 +26,6 @@ export default class Kitchen extends Component {
         socket.on('offline', userOff => {
             console.log('off',userOff);
         } )
-
     }
 
     render() {

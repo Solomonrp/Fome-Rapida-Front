@@ -16,6 +16,7 @@ import Kitchen from './components/Kitchen/Dashboard';
 import Payment from './components/payment';
 import Order from './components/ordersMenu'
 import pagarme from 'pagarme/browser';
+import Admin from './components/Kitchen/Admin';
 
 class App extends Component {
 
@@ -57,10 +58,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // const { endpoint } = this.state;
-    // const socket = socketIOClient(endpoint);
     const socket = this.state.socket;
-    // this.state.socket.on('up', data => this.setState({ response: data }));
     socket.on('up', data => console.log('hello', data));
   }
 
@@ -372,8 +370,7 @@ class App extends Component {
 
   render() {
     const background = {
-      // 'background': `linear-gradient(90deg, red ${this.state.background}%, white 33%)`,
-      // 'height': '100vh'
+      
     }
     const contextValues = {
       state: this.state,
@@ -397,6 +394,7 @@ class App extends Component {
             <Route path='/pedidos' render={() => <Pedidos state={this.state} />} />
             <Route path='/pagos' render={()=> <Order />} /> 
             <Route exact path='/Kitchen' component={Kitchen} />
+            <Route exact path='/Kitchen/admin' component={Admin} />
             {/* <Route exact path='/' render={() => <Home changeState={this.changeState} api={this.callApi} data={this.state.allPlants} />} /> */}
           </Switch>
           {/* <Cart cart={this.state.cart} cartSize={this.state.cartQ} /> */}
