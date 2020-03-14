@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router';
 import { useHistory } from 'react-router-dom'
-import socketIOClient from 'socket.io-client';
-import Button from './button';
 import '../style/login.css';
 import axios from 'axios';
-import querySearch from 'stringquery';
 import Nav from './nav';
-import Food from '../components/food';
 import '../style/payment.css';
 import pagarme from 'pagarme/browser';
 

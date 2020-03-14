@@ -123,6 +123,7 @@
 
   .food__desc--category > a {
     margin-top: 0px !important;
+    cursor: pointer;
   }
 
   .food_desc_quantity {

@@ -14,7 +14,7 @@ class Itens extends Component {
     const category = this.props.location.search;
     const params = queryString.parse(category);
     console.log('categoria', params.category);
-    this.handleCategory()
+    this.handleCategory();
     // this.props.background(66);
     document.body.classList.add('itensBack');
   }
