@@ -22,6 +22,7 @@ export default class Kitchen extends Component {
             });
         });
         socket.on('table', table => {
+            console.log(table);
             this.state.tables.push(table);
         })
         socket.on('offline', userOff => {
