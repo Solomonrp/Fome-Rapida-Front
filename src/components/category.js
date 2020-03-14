@@ -13,7 +13,7 @@ class Category extends Component {
 
   componentDidMount() {
     document.body.classList.add('categoryBack');
-    const socket = this.props.socket;
+    const socket = this.props.socket; 
     const query = localStorage.getItem("table")
     let id = querySearch(window.location.search);
     console.log('query', query);
@@ -21,6 +21,7 @@ class Category extends Component {
     socket.emit('log', query);
     localStorage.setItem("id",id.id);
     localStorage.setItem("auth", id.auth);
+    socket.emit('log', query);
   }
 
   componentWillUnmount() {
