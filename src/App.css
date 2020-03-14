@@ -13,13 +13,13 @@ body {
 }
 
 .categoryBack {
-  background: linear-gradient(90deg, red 33%, white 33%);
+  background: linear-gradient(90deg, #323859 33%, #191c2c 33%);
 }
 
 .itensBack {
-  background: linear-gradient(90deg, red 66%, white 33%)
+  background: linear-gradient(90deg, #323859 66%, #191c2c 33%)
 }
 
 .orderBack {
-  background: linear-gradient(90deg, red 100%, white 33%)
+  background: linear-gradient(90deg, #323859 100%, white 33%)
 }

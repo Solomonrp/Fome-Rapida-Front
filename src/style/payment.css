@@ -1,0 +1,15 @@
+@media only screen and (min-width : 320px) and (max-width : 1024px) {
+
+}
+
+.field{
+  width: 80%;
+  margin: auto;
+}
+
+.payForm{
+  background: white;
+  border-radius: 20px;
+  width: 90%;
+  margin: auto;
+}
