@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; 
+import { Link } from 'react-router-dom';
 import '../style/cart.css';
 import Abtn from '../style/styled/btn_ball';
 import cart from '../style/img/icons/cart.png';
@@ -139,7 +140,8 @@ class Cart extends Component {
         <div>
           <img src={cart} className="nav_car_img" />
         </div>
-        <Abtn onClick={() =>this.handlePayM()}>Pay</Abtn>
+        {/* <Abtn onClick={() =>this.handlePayM()}>Pay</Abtn> */}
+        <Link to={'/pagamento'}>Pag</Link>
         <Abtn onClick={() => this.handleCart()} >+</Abtn>
         <div>
           <a>R$ {this.props.state.price},00</a>

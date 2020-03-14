@@ -24,7 +24,7 @@ export default class Kitchen extends Component {
             this.state.tables.push(table.mesa);
         })
         socket.on('offline', userOff => {
-            console.log(userOff);
+            console.log('off',userOff);
         } )
     }
 

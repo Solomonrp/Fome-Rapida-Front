@@ -18,6 +18,7 @@ class Food extends Component {
 
   handleClickCart = () => {
     this.props.handleCart(this.props);
+    console.log(this.props)
   }
 
   handlePlusBtn = (event) => {

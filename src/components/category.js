@@ -3,6 +3,7 @@ import '../style/category.css';
 import Food from '../components/food';
 import Nav from './nav';
 import Cart from './cart';
+import querySearch from 'stringquery';
 
 class Category extends Component {
 
@@ -14,8 +15,12 @@ class Category extends Component {
     document.body.classList.add('categoryBack');
     const socket = this.props.socket;
     const query = localStorage.getItem("table")
-    console.log('query',query)
+    let id = querySearch(window.location.search);
+    console.log('query', query);
+    console.log('id',id)
     socket.emit('log', query);
+    localStorage.setItem("id",id.id);
+    localStorage.setItem("auth", id.auth);
   }
 
   componentWillUnmount() {
@@ -25,7 +30,7 @@ class Category extends Component {
   render() {
     return (
       <div className="wrapper2">
-        <Nav />
+        <Nav cart={this.props.data}/>
         <div className="category">
           {
             this.props.data.map ?

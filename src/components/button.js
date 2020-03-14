@@ -11,7 +11,7 @@ class Button extends Component {
   }
 
   googleLogin = () => {
-    axios.get('http://localhost:5000/auth/google')
+    axios.get(process.env.REACT_APP_BACK_END)
       .then(res => {
         console.log(res)
       })
@@ -22,7 +22,7 @@ class Button extends Component {
 
   flogin = () => {
 
-    let a = window.open('http://localhost:5000/auth/google', "_self");
+    let a = window.open(`${process.env.REACT_APP_BACK_END}/auth/google`, "_self");
     // a.open();
   //   a.onbeforeunload = function(){
   //     // Do something
@@ -61,6 +61,8 @@ class Button extends Component {
       lineHeight: "19px",
       textAlign: "center",
       textDecoration: 'none',
+      background: 'none',
+      border: "none"
     }
 
     const btn_class3 = {
@@ -128,7 +130,7 @@ class Button extends Component {
               </div>
               :
               <div onClick={this.handleOnclick} style={btn}>
-                <Link to="/category" style={btn_class2} onClick={this.handleOnclick}>{this.props.children}</Link>
+                <button type="submit" style={btn_class2} onClick={this.handleOnclick}>{this.props.children}</button>
               </div>
         }
       </React.Fragment>

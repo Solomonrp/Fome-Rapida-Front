@@ -2,11 +2,24 @@
   .nav__wrapper {
     margin-bottom: 25px;
     display: flex;
-    /* justify-content: space-between; */
   }
 
   .nav__wrapper_icons > a {
     margin: 5px 10px;
+    padding: 2%;
+    border-radius: 25px;
+    background: #F5F5F7;
+    opacity: 50%;
+  }
+
+  .nav__wrapper_icons > a > span {
+    position: absolute;
+    background: #ff6857;
+    border-radius: 20px;
+    color: #ff6857;
+    padding: 0px 6px;
+    top: 3px;
+    right: 2%;
   }
 
   .nav__burguer {
@@ -37,8 +50,6 @@
     text-decoration: none;
     list-style-type: none;
     background: #1d1717;
-    /* height: 100%; */
-    /* margin-right: 15px; */
     margin: 0 0 0 -120px ; 
     transition: margin .5s;
     z-index: 1;
