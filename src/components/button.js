@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import Google from '../style/img/icons/google.png';
 import axios from 'axios';
 
@@ -100,7 +99,6 @@ class Button extends Component {
       fontWeight: "600",
       letterSpacing: "1px",
       // lineHeight: "19px",
-      width: "100%",
       color: `white`,
     }
 
@@ -124,7 +122,7 @@ class Button extends Component {
             </div>
             : this.props.type === "google" ?
               <div style={backgroundGoogle}>
-                <img src={Google} className="login__google" />
+                <img src={Google} className="login__google" alt=""/>
                 <a to="/category" style={btn_class3} onClick={this.flogin}>
                   {this.props.children}</a>
               </div>

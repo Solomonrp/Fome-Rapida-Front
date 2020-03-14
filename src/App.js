@@ -302,8 +302,8 @@ class App extends Component {
             <Route path='/category/itens' render={(props) => <Itens {...props} data={this.pizzas} background={this.handleBackground} cartHandler={this.handleCart} />} />
             <Route path='/orders' render={() => <Orders handlePay={this.handlePay} sendOrder={this.sendOrder} handlePrice={this.handlePrice} handleCartChange={this.handleCartChange} state={this.state} background={this.handleBackground} orders={this.state.cart} />} />
             <Route path='/pagamento' render={() => <Payment sendOrder={this.sendOrder} handlePay={this.handlePay} handleStage={this.handleStage} state={this.state} />} />
-            <Route path='/pedidos' render={() => <Pedidos state={this.state} />} />
             <Route path='/pagos' render={()=> <Order />} /> 
+            <Route path='/pedidos' render={() => <Pedidos state={this.state.cart} />} />
             <Route exact path='/Kitchen' component={Kitchen} />
             <Route exact path='/Kitchen/admin' component={Admin} />
             {/* <Route exact path='/' render={() => <Home changeState={this.changeState} api={this.callApi} data={this.state.allPlants} />} /> */}

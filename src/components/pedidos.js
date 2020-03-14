@@ -7,10 +7,11 @@ import querySearch from 'stringquery';
 
 export const Pedidos = (props) => {
 
-  const [pedido, setPedido ] = useState([props.state.cart]);
+  const [pedido, setPedido ] = useState(props.state);
   const [pedidoId, setPedidoId] = useState([]);
 
   useEffect(() => {
+    console.log('data pedido normal',pedido)
     getData();
   },[])
 
@@ -22,7 +23,7 @@ export const Pedidos = (props) => {
     let foodId = querySearch(window.location.search);
     try {
       const data = await axios.post(`${process.env.REACT_APP_BACK_END}/findfood`, foodId);
-      console.log(data.data)
+      console.log('data pedido',data.data.length)
       setPedidoId(data.data)
     } catch (error) {
       console.log(error)
@@ -34,14 +35,15 @@ export const Pedidos = (props) => {
     <Nav />
     <div>
       {
-        pedidoId ?
+        pedidoId.length > 0 ?
         pedidoId.map((comidas, index) => {
           return comidas.order.map((comida, index) =>{
             return <Food quantity={comida.quantity} img={comida.img} name={comida.name} time={comida.time} key={index} />
           })
         })
-        : props.state.cart ?
-        props.state.cart.map((food, index) => {
+        : 
+        props.state.length > 0 ?
+          props.state.map((food, index) => {
           return <Food quantity={food.quantity} idCart={index} img={food.img} name={food.name} time={food.time} key={index} />
         })
         :
