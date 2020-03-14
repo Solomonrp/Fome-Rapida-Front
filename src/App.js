@@ -235,6 +235,8 @@ class App extends Component {
   }
 
   sendOrder = () => {
+    let mesa = localStorage.getItem("table");
+    console.log(mesa)
     let shop = {
       id: localStorage.getItem("id"),
       cart: this.state.cart,
