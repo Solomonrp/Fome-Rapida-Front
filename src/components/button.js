@@ -11,7 +11,7 @@ class Button extends Component {
   }
 
   googleLogin = () => {
-    axios.get('http://localhost:5000/auth/google')
+    axios.get(process.env.REACT_APP_BACK_END)
       .then(res => {
         console.log(res)
       })
@@ -21,11 +21,19 @@ class Button extends Component {
   }
 
   flogin = () => {
-    window.open('http://localhost:5000/auth/google', "mywindow", "location=1,status=1,scrollbars=1, width=800,height=800");
-    let listener = window.addEventListener('message', (message) => {
-      //message will contain facebook user and details
-      console.log(message)
-    });
+
+    let a = window.open(`${process.env.REACT_APP_BACK_END}/auth/google`, "_self");
+    // a.open();
+  //   a.onbeforeunload = function(){
+  //     // Do something
+  //     console.log('mains')
+  //  }
+    // const listener = await window.addEventListener('message', (message) => {
+    //   //message will contain facebook user and details
+    //   console.log(message)
+    //   console.log('status',message[0].statusCode)
+    //   return message
+    // });
     // quando tiver logado chamar  mywindow.close();
   }
 
@@ -53,6 +61,8 @@ class Button extends Component {
       lineHeight: "19px",
       textAlign: "center",
       textDecoration: 'none',
+      background: 'none',
+      border: "none"
     }
 
     const btn_class3 = {
@@ -113,14 +123,14 @@ class Button extends Component {
               <button type="submit" onClick={this.handleOnclick} style={background}>{this.props.children}</button>
             </div>
             : this.props.type === "google" ?
-              <div onClick={this.handleOnclick} style={backgroundGoogle}>
+              <div style={backgroundGoogle}>
                 <img src={Google} className="login__google" />
                 <a to="/category" style={btn_class3} onClick={this.flogin}>
                   {this.props.children}</a>
               </div>
               :
               <div onClick={this.handleOnclick} style={btn}>
-                <Link to="/category" style={btn_class2} onClick={this.handleOnclick}>{this.props.children}</Link>
+                <button type="submit" style={btn_class2} onClick={this.handleOnclick}>{this.props.children}</button>
               </div>
         }
       </React.Fragment>

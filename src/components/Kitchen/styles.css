@@ -174,3 +174,102 @@ tbody > tr:last-of-type {
   font-size: 25px;
   color: #39719b;
 }
+
+/* Kitchen ADM */
+.container-header-admin {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  position: fixed;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container-header-admin > .title-left {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 20vw;
+  color: white;
+  padding: 10px;
+}
+
+.fa-bars, .fa-sign-out-alt {
+  font-size: 25px;
+  color: white;
+  cursor: pointer;
+}
+
+.icons-right {
+  padding: 30px;
+}
+
+.name-conteudo {  
+  height: 91.5vh;
+  display: grid;
+  grid-template-columns: 5fr 5fr;
+  grid-auto-columns: auto;
+  overflow: hidden;
+}
+
+.menu-left {
+  background-color: #212529;
+  height: 100%;
+  width: 19vw;
+  transition: linear 0.2s;
+  color: #595c5f;
+  text-align: left;
+}
+
+.menu-left > h4 {
+  padding: 20px;
+  text-align: left;
+}
+.menu-left >ul > li {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.menu-left >ul > li > a {
+  color: #595c5f;
+  text-decoration: none;
+  font-size: 21px;
+  padding-left: 25px;
+  width: 100%;
+  justify-self: left;
+}
+
+.menu-left >ul > li > a:hover {
+  color: white;
+  text-decoration: none;
+  transition: .5s;
+}
+
+.menu-left >ul > li > a > i {
+  padding: 0 15px;
+  font-size: 20px;
+}
+
+.fa-angle-right {
+  justify-self: right;
+  padding: 15px;
+
+}
+
+.menu-left-disable {
+  width: 0vw;
+  transition: width 0.3s;
+}
+
+.main-right {
+  background-color: white;
+  width: calc(100vw - 16vw);
+  max-height: 100%;
+  overflow-y: auto;
+  transition: linear 0.2s;
+}
+
+.main-right-full-width{
+  width: 100vw;
+}

@@ -1,30 +1,74 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom'
 import socketIOClient from 'socket.io-client';
 import Button from './button';
 import '../style/login.css';
 import axios from 'axios';
-
-
+import querySearch from 'stringquery';
 
 export const Login2 = (props) => {
+
+
+  useEffect(() => {
+    getTable();
+  }, [])
+
+  useEffect(() => {
+    // const socket = props.state.socket;
+    // socket.on('table', data => {
+    //   console.log('table', data.mesa)
+    //   if(data.mesa){
+    //     localStorage.setItem("table", data.mesa)
+    //   }
+    //   else {
+    //     localStorage.setItem("table", 'bancada')
+    //   }
+    // }
+    // );
+  })
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState('');
+  const [table, setTable] = useState(0);
+
+  let history = useHistory()
+
+
+  const getTable = () => {
+    let query = querySearch(window.location.search)
+    console.log('table', query)
+    if (query) {
+      localStorage.setItem("table", query.mesa)
+      localStorage.setItem("email", email)
+    }
+    else {
+      localStorage.setItem("table", 'bancada')
+    }
+    setTable(query)
+    console.log('localstorate', localStorage.getItem("table"));
+
+  }
+
+  // history.push('/pedidos')
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
   }
 
+
   const subscribe = async () => {
     console.log('subs click');
-    const data = { 
+    const data = {
       email: email,
       password: password
     }
     try {
-      const result = await axios.post('http://localhost:5000/createUser/aplication', data)
-      console.log(result);
+      const result = await axios.post(`${process.env.REACT_APP_BACK_END}/createUser/aplication`, data)
+      console.log(result.headers);
+      if (result.status === 200) {
+      }
     } catch (error) {
       console.log(error);
     }
@@ -37,8 +81,16 @@ export const Login2 = (props) => {
       password: password
     }
     try {
-      const result = await axios.post('http://localhost:5000/user-authentication', data)
+      const result = await axios.post(`${process.env.REACT_APP_BACK_END}/user-authentication`, data)
+      console.log(result.headers);
       console.log(result);
+      if (result.status === 200) {
+        localStorage.setItem('auth', result.data)
+        history.push('/category');
+      }
+      const socket = this.props.state.socket;
+      socket.emit('log', email);
+      // log
     } catch (error) {
       console.log(error);
     }
@@ -50,7 +102,6 @@ export const Login2 = (props) => {
       name: event.target.value
     })
   }
-
 
   // const handleChange = (event) => {
   //   this.props.handleState(event.name, event.value);
@@ -66,12 +117,12 @@ export const Login2 = (props) => {
   }
 
   const googleLogin = () => {
-    axios.get('http://localhost:5000/auth/google')
+    axios.get(`${process.env.REACT_APP_BACK_END}/auth/google`)
       .then(res => {
         console.log(res)
       })
       .catch(error => {
-        console.log(error)
+        console.log('error', error)
       })
   }
 

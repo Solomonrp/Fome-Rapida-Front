@@ -36,7 +36,7 @@ class Orders extends Component {
           {/* <Food type='cart' /> */}
           {/* <Food type='cart' /> */}
         </div>
-        <Cart sendOrder={this.props.sendOrder} state={this.props.state} orders={this.props.orders}/>
+        <Cart handlePay= {this.props.handlePay} sendOrder={this.props.sendOrder} state={this.props.state} orders={this.props.orders}/>
       </React.Fragment>
     )
   }
