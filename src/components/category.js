@@ -13,9 +13,12 @@ class Category extends Component {
   componentDidMount() {
     document.body.classList.add('categoryBack');
     const socket = this.props.socket;
-    const query = localStorage.getItem("table")
-    console.log('query',query)
-    socket.emit('log', query);
+    const query = localStorage.getItem("table");
+    socket.emit('userLogin', query);
+    socket.on(`socketID`, id => {
+      console.log('socket iddddddddddddddd', id)
+    });
+
   }
 
   componentWillUnmount() {

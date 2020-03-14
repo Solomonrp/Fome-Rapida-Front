@@ -3,7 +3,7 @@ import AppContext from "../../context/AppContext";
 
 export default class Item extends Component {
     state = {
-        timeLeft: this.context.state.pedidos[this.props.pedido].itens[this.props.index].tempoRestante.split(":"),
+        timeLeft: this.props.product.time.split(":"),
     }
 
     componentDidMount() {
@@ -11,7 +11,7 @@ export default class Item extends Component {
     }
 
     changeTime = () => {
-        if (this.context.state.pedidos[this.props.pedido].itens[this.props.index].status === 'realizando') {
+        if (this.props.product.status === 'realizando') {
             let timeLeft = this.state.timeLeft;
             this.interval = setInterval(() => {
 
@@ -19,16 +19,16 @@ export default class Item extends Component {
                     timeLeft[1] -= 1;
                     timeLeft[1].toString().length < 2 ? timeLeft[1] = `0${timeLeft[1]}` : timeLeft[1] = timeLeft[1].toString();
                     this.setState({ timeLeft });
-                    this.context.alterStateTempoRestante("item", this.props.pedido, this.props.index, this.state.timeLeft);
-                } else if (timeLeft[0] > '0') {
+                    this.props.timeLeft("item", this.props.pedido, this.props.index, this.state.timeLeft);
+                } else if (timeLeft[0] > '00') {
                     timeLeft[0] -= 1;
                     timeLeft[1] = 59;
                     this.setState({ timeLeft });
-                    this.context.alterStateTempoRestante("item", this.props.pedido, this.props.index, this.state.timeLeft);
+                    this.props.timeLeft("item", this.props.pedido, this.props.index, this.state.timeLeft);
                 } else {
                     clearInterval(this.interval);
-                    this.context.alterStateTempoRestante("item", this.props.pedido, this.props.index, this.state.timeLeft);
-                    this.context.alterStateAtrasado("item", this.props.pedido, this.props.index);
+                    this.props.timeLeft("item", this.props.pedido, this.props.index, this.state.timeLeft);
+                    this.props.alterStateLate("item", this.props.pedido, this.props.index);
                 };
             }, 1000);
         }
@@ -40,7 +40,7 @@ export default class Item extends Component {
 
     alterStateConcluido = () => {
         clearInterval(this.interval);
-        this.context.alterStateConcluido(this.props.pedido, this.props.index)
+        this.props.alterStateFinished(this.props.pedido, this.props.index)
         this.changeTime();
     }
 
@@ -50,33 +50,35 @@ export default class Item extends Component {
                 {
                     context => (
                         <React.Fragment>
+
                             {
-                                this.context.state.pedidos[this.props.pedido].itens[this.props.index].status === 'realizando' &&
+                                this.props.product.status === 'realizando' &&
                                 <tr>
-                                    <th>{this.props.product.product}</th>
-                                    <th>{this.props.product.quantidade}</th>
+                                    <th>{this.props.product.name}</th>
+                                    <th>{this.props.product.quantity}</th>
                                     <th>{this.state.timeLeft[0]}m:{this.state.timeLeft[1]}s</th>
                                     <th><button onClick={this.alterStateConcluido} className='button-finished'><i className="fas fa-check"></i></button></th>
                                 </tr>
                             }
                             {
-                                this.context.state.pedidos[this.props.pedido].itens[this.props.index].status === 'atrasado' &&
+                                this.props.product.status === 'atrasado' &&
                                 <tr className='trAtrasada'>
-                                    <th>{this.props.product.product}</th>
-                                    <th>{this.props.product.quantidade}</th>
+                                    <th>{this.props.product.name}</th>
+                                    <th>{this.props.product.quantity}</th>
                                     <th>{this.state.timeLeft[0]}m:{this.state.timeLeft[1]}s</th>
                                     <th><button onClick={this.alterStateConcluido} className='button-finished'><i className="fas fa-check"></i></button></th>
                                 </tr>
                             }
                             {
-                                this.context.state.pedidos[this.props.pedido].itens[this.props.index].status === 'concluido' &&
+                                this.props.product.status === 'concluido' &&
                                 <tr className='trConcluida'>
-                                    <th>{this.props.product.product}</th>
-                                    <th>{this.props.product.quantidade}</th>
+                                    <th>{this.props.product.name}</th>
+                                    <th>{this.props.product.quantity}</th>
                                     <th>{this.state.timeLeft[0]}m:{this.state.timeLeft[1]}s</th>
                                     <th><i className="fas fa-check-double"></i></th>
                                 </tr>
                             }
+
 
                         </React.Fragment>
                     )
