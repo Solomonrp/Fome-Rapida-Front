@@ -6,7 +6,7 @@ export default class Item extends Component {
         timeLeft: this.props.product.time.split(":"),
     }
 
-    componentDidMount() {
+    componentDidMount() {      
         this.changeTime();
     }
 
