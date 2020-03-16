@@ -21,7 +21,7 @@ class Category extends Component {
     socket.emit('log', query);
     localStorage.setItem("id",id.id);
     localStorage.setItem("auth", id.auth);
-    socket.emit('log', query);
+    socket.emit('userLogin', query);
   }
 
   componentWillUnmount() {

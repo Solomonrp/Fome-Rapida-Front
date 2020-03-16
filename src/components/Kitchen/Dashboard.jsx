@@ -2,30 +2,102 @@ import React, { Component } from 'react';
 import './styles.css';
 import AppContext from "../../context/AppContext";
 import PedidoRealizado from "../Kitchen/PedidoRealizado";
+import axios from 'axios';
 
 export default class Kitchen extends Component {
 
     state = {
-        orders: '',
+        orders: [],
         tables: []
     }
-    
+
     componentDidMount() {
         this.context.counterLis();
         const socket = this.context.state.socket;
         socket.on('orders', orders => {
-            console.log('Orders', orders)
+            let order = this.state.orders;
+            order.push(orders);
             this.setState({
-                orders: orders
-            })
+                orders: order
+            });
         });
         socket.on('table', table => {
-            console.log('table', table);
-            this.state.tables.push(table.mesa);
+            console.log(table);
+            this.state.tables.push(table);
         })
         socket.on('offline', userOff => {
-            console.log('off',userOff);
-        } )
+            // this.setState({
+            //     tables: [userOff]
+            // })
+            console.log('sesssao do user foi encerrada', userOff);
+        })
+    }
+
+    alterStateTempoRestante = (tipo, pedido, item, tempo) => {
+        const state = { ...this.state };
+        switch (tipo) {
+            case 'item':
+                state.orders[pedido].order[item].time = tempo.join(':');
+                break;
+            case 'pedido':
+                state.orders[pedido].tempoTotalRestante = tempo.join(':');
+                break;
+            default:
+                console.log('deu muito ruim')
+        }
+        this.setState(state);
+    }
+
+    alterStateAtrasado = (tipo, pedido, item) => {
+        const state = { ...this.state };
+        switch (tipo) {
+            case 'item':
+                state.orders[pedido].order[item].status = 'atrasado';
+                break;
+            case 'pedido':
+                state.orders[pedido].statusPedido = 'atrasado';
+                axios.put('http://localhost:5000/update-order', state.orders[pedido])
+                    .then((res) => {
+                        this.context.state.socket.emit('orderLate', res);
+                    })
+                    .catch((err) => {
+                        console.log('front erros', err)
+                    })
+                break;
+            default:
+                console.log('Deu muito ruim cara ;_:');
+        }
+        this.setState(state);
+    }
+
+    alterStateConcluido = (Indexpedido, item) => {
+        const state = { ...this.state };
+
+        state.orders[Indexpedido].order[item].status = 'concluido';
+
+        if (state.orders[Indexpedido].ItensConcluidos === 0) {
+            state.orders[Indexpedido].ItensConcluidos = 1;
+            this.setState(state);
+        } else {
+            state.orders[Indexpedido].ItensConcluidos = state.orders[Indexpedido].ItensConcluidos + 1;
+            this.setState(state);
+        }
+        this.verifyStatus(Indexpedido);
+    }
+
+    verifyStatus = (Indexpedido) => {
+
+        if (this.state.orders[Indexpedido].order.length === this.state.orders[Indexpedido].ItensConcluidos) {
+            this.state.orders[Indexpedido].statusPedido = 'concluido';
+            axios.put('http://localhost:5000/update-order', this.state.orders[Indexpedido])
+                .then((res) => {
+                    this.context.state.socket.emit('orderFinished', res);
+                })
+                .catch((err) => {
+                    console.log('front erros', err)
+                })
+        }
+
     }
 
     render() {
@@ -36,7 +108,7 @@ export default class Kitchen extends Component {
                         <React.Fragment>
                             <header>
                                 <div className="container-header">
-                                    <h2> <a href="#">PEDIDOS COZINHA "NOME RESTAURANTE" 'logo aqui' </a></h2>
+                                    <h2> <a href="#">PEDIDOS COZINHA IRON LANCHES </a></h2>
                                     <a href="#"><i className="fas fa-user-cog"></i></a>
                                 </div>
                             </header>
@@ -49,13 +121,14 @@ export default class Kitchen extends Component {
                                     </div>
                                     <div className="list">
                                         <ul className="itens">
-                                            {context.state.realizando.map((pedido, index) => {
+                                            {this.state.tables.map((nMesa, index) => {
                                                 return (
                                                     <li key={index} className="item">
                                                         <div className="title-list-tables" >
-                                                            <h3>Mesa {pedido.mesa}</h3>
+                                                            <h3>Mesa {nMesa}</h3>
                                                         </div>
-                                                    </li>)
+                                                    </li>
+                                                )
                                             })}
                                         </ul>
                                     </div>
@@ -67,9 +140,11 @@ export default class Kitchen extends Component {
                                     </div>
                                     <div className="list">
                                         <ul className="itens">
-                                            {context.state.pedidos.map((pedido, index) => {
-                                                return pedido.statusPedido === 'realizado' && <PedidoRealizado pedido={pedido} key={index} index={index} />;
-                                            })}
+                                            {
+                                                this.state.orders.map((pedido, index) => {
+                                                    return pedido.statusPedido === 'realizado' && <PedidoRealizado pedido={pedido} key={index} timeLeft={this.alterStateTempoRestante} alterStateLate={this.alterStateAtrasado} alterStateFinished={this.alterStateConcluido} index={index} />;
+                                                })
+                                            }
                                         </ul>
                                     </div>
                                 </div>
@@ -80,8 +155,8 @@ export default class Kitchen extends Component {
                                     </div>
                                     <div className="list">
                                         <ul className="itens">
-                                            {context.state.pedidos.map((pedido, index) => {
-                                                return pedido.statusPedido === 'atrasado' && <PedidoRealizado pedido={pedido} key={index} index={index} />;
+                                            {this.state.orders.map((pedido, index) => {
+                                                return pedido.statusPedido === 'atrasado' && <PedidoRealizado pedido={pedido} key={index} timeLeft={this.alterStateTempoRestante} alterStateLate={this.alterStateAtrasado} alterStateFinished={this.alterStateConcluido} index={index} />;
                                             })}
                                         </ul>
                                     </div>
@@ -93,8 +168,8 @@ export default class Kitchen extends Component {
                                     </div>
                                     <div className="list">
                                         <ul className="itens">
-                                            {context.state.pedidos.map((pedido, index) => {
-                                                return pedido.statusPedido === 'concluido' && <PedidoRealizado pedido={pedido} key={index} index={index} />;
+                                            {this.state.orders.map((pedido, index) => {
+                                                return pedido.statusPedido === 'concluido' && <PedidoRealizado pedido={pedido} key={index} timeLeft={this.alterStateTempoRestante} alterStateLate={this.alterStateAtrasado} index={index} />;
                                             })}
                                         </ul>
                                     </div>

@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "components": "^0.1.0",
+    "dotenv": "^8.2.0",
     "query-string": "^6.10.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
