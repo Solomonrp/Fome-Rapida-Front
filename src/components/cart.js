@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; 
 import { Link } from 'react-router-dom';
 import '../style/cart.css';
 import Abtn from '../style/styled/btn_ball';
@@ -147,7 +145,6 @@ class Cart extends Component {
           <a>R$ {this.props.state.price},00</a>
         </div>
         <div className="cart__closed">
-          <ReactCSSTransitionGroup {...transitionOptions}> 
           {/* {
             this.state.step &&
               this.props.orders.map((item, index) => {
@@ -164,7 +161,6 @@ class Cart extends Component {
                   </div>
               })
           }
-          </ReactCSSTransitionGroup>
         </div>
       </div>
     )
