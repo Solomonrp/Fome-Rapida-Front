@@ -42,6 +42,7 @@ class Nav extends Component {
         <ul ref={this.nav_wrapperRef} className="nav__list">
           <li><Link to={`/category`} onClick={() => this.handleSide()} >Categorias</Link></li>
           <li><Link to={`/orders`} onClick={() => this.handleSide()}>Pedidos</Link></li>
+          <li><Link to={`/pagos`} onClick={() => this.handleSide()}>Pago</Link></li>
         </ul>
 
         <div ref={this.burguer} className="nav__wrapper_icons">
