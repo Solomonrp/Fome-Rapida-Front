@@ -422,5 +422,10 @@ td:last-child{
   border: solid 10px rgba(255, 255, 255, 0.2);
   border-top-color: black;
   animation: spin 1s infinite linear;
-  margin: 25%;
 }
+
+@keyframes spin { 
+  100% { 
+    transform: rotate(360deg); 
+  } 
+} 
