@@ -414,6 +414,12 @@ td:last-child{
   
 }
 
+@keyframes spin { 
+  100% { 
+    transform: rotate(360deg); 
+  } 
+} 
+
 .circle {
   width: 80px;
   height: 80px;
@@ -423,9 +429,3 @@ td:last-child{
   border-top-color: black;
   animation: spin 1s infinite linear;
 }
-
-@keyframes spin { 
-  100% { 
-    transform: rotate(360deg); 
-  } 
-} 
