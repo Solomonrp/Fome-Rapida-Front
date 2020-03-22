@@ -247,9 +247,8 @@ tbody > tr:last-of-type {
   color: #595c5f;
   text-decoration: none;
   font-size: 21px;
-  padding-left: 25px;
+  text-align: left;
   width: 100%;
-  justify-self: left;
   cursor: pointer;
 }
 
@@ -286,8 +285,131 @@ tbody > tr:last-of-type {
   width: 100vw;
 }
 
-
 .img-full {
   width: 100%;
   height: 100%;
+}
+
+.title-admin {
+  padding: 5px 15px;
+  text-align: left;
+  color: #595c5f;
+}
+.table-conteudo{
+  width: 100%;
+  margin: auto;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin: auto;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+td:last-child{
+  width: 30%;
+}
+/* tr:nth-child(even) {
+  background-color: #dddddd;
+} */
+
+.title-table-name {
+  width: 50%;
+}
+.btn-editar {
+  border: none;
+  background-color:#5c5c5f;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 5px;
+  cursor: pointer;
+  margin-right: 25px;
+  width: 85px;
+  border-radius: 5px;
+}
+
+.btn-excluir {
+  border: none;
+  background-color:#ff0f0fba;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 5px;
+  cursor: pointer;
+  margin-right: 25px;
+  width: 85px;
+  border-radius: 5px;
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.btn-add {
+  border: none;
+  border: none;
+  background-color:#51ba0fe8;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 5px;
+  cursor: pointer;
+  margin-right: 25px;
+  margin-left: 15px;
+  width: 200px;
+  border-radius: 5px;
+
+}
+
+.form-new {
+  width: 45%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.form-new > input {
+  transition: ease 0.1s;
+  border: none;
+  width: 100%;
+  font-size: 15px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #dddddd;
+}
+
+.form-products {
+  width: 75%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.form-products > input {
+  border: none;
+  width: 100%;
+  font-size: 15px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #dddddd;
+  margin-right: 5px;
+}
+
+.form-products > select {
+  border: none;
+  width: 100%;
+  font-size: 15px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #dddddd;
+  margin-right: 5px;
+  
 }

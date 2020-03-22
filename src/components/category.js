@@ -7,19 +7,15 @@ import querySearch from 'stringquery';
 
 class Category extends Component {
 
-  // componentDidMount() {
-  //   this.props.background(33);
-  // }
-
   componentDidMount() {
     document.body.classList.add('categoryBack');
-    const socket = this.props.socket; 
+    const socket = this.props.socket;
     const query = localStorage.getItem("table")
     let id = querySearch(window.location.search);
     console.log('query', query);
-    console.log('id',id)
+    console.log('id', id)
     socket.emit('log', query);
-    localStorage.setItem("id",id.id);
+    localStorage.setItem("id", id.id);
     localStorage.setItem("auth", id.auth);
     socket.emit('userLogin', query);
   }
@@ -31,7 +27,7 @@ class Category extends Component {
   render() {
     return (
       <div className="wrapper2">
-        <Nav cart={this.props.data}/>
+        <Nav cart={this.props.data} />
         <div className="category">
           {
             this.props.data.map ?

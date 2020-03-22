@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import AddCategoria from '../Kitchen/AddCategoria';
+import AddProducts from '../Kitchen/AddProducts';
 
 export default class Admin extends Component {
 
     state = {
         Dashboard: false,
         Geral: false,
-        Categorias: false,
+        Categorias: true,
         Produtos: false,
         Mesas: false,
     }
@@ -81,7 +82,10 @@ export default class Admin extends Component {
                         }
 
                         {
-                            this.state.Categorias && <AddCategoria/>
+                            this.state.Categorias && <AddCategoria />
+                        }
+                        {
+                            this.state.Produtos && <AddProducts addNewCategory={this.addNewCategory}/>
                         }
 
                     </div>
