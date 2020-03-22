@@ -56,7 +56,7 @@ export default class Kitchen extends Component {
                 break;
             case 'pedido':
                 state.orders[pedido].statusPedido = 'atrasado';
-                axios.put('http://localhost:5000/update-order', state.orders[pedido])
+                axios.put(`${process.env.REACT_APP_BACK_END}/update-order`, state.orders[pedido])
                     .then((res) => {
                         this.context.state.socket.emit('orderLate', res);
                     })
@@ -89,7 +89,7 @@ export default class Kitchen extends Component {
 
         if (this.state.orders[Indexpedido].order.length === this.state.orders[Indexpedido].ItensConcluidos) {
             this.state.orders[Indexpedido].statusPedido = 'concluido';
-            axios.put('http://localhost:5000/update-order', this.state.orders[Indexpedido])
+            axios.put(`${process.env.REACT_APP_BACK_END}/update-order`, this.state.orders[Indexpedido])
                 .then((res) => {
                     this.context.state.socket.emit('orderFinished', res);
                 })
