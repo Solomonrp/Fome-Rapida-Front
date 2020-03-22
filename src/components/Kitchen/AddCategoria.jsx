@@ -59,7 +59,7 @@ export default class AddCategoria extends Component {
                         </tr>
                         {
 
-                            this.state.allCategory.length === 0 ? <h3>Nenhuma categoria Cadastrada</h3> :
+                            this.state.allCategory.length === 0 ? <div class="circle"></div> :
                                 this.state.allCategory.map((category, index) => {
                                     return (
                                         <tr>

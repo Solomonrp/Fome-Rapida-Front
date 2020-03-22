@@ -413,3 +413,14 @@ td:last-child{
   margin-right: 5px;
   
 }
+
+.circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  box-sizing: border-box;
+  border: solid 10px rgba(255, 255, 255, 0.2);
+  border-top-color: black;
+  animation: spin 1s infinite linear;
+  margin: 25%;
+}

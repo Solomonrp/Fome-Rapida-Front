@@ -90,7 +90,7 @@ export default class AddProducts extends Component {
                             <th>Ações</th>
                         </tr>
                         {
-                            this.state.allProducts.length === 0 ? <h3>Nenhum produto cadastrado</h3> :
+                            this.state.allProducts.length === 0 ? <div class="circle"></div> :
                                 this.state.allProducts.map((product, index) => {
                                     return (
                                         <tr>
