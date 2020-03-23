@@ -1,6 +1,9 @@
 {
   "name": "fomerapidafront",
   "version": "0.1.0",
+  "engines": {
+    "node": "12.9.0"
+   },
   "private": true,
   "dependencies": {
     "@fortawesome/react-fontawesome": "^0.1.8",
