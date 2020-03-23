@@ -39,8 +39,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const socket = this.state.socket;
-    socket.on('up', data => console.log('hello', data));
+    // const socket = this.state.socket;
+    // socket.on('up', data => console.log('hello', data));
     this.handleAuth()
   }
 
