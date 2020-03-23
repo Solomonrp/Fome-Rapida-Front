@@ -19,6 +19,7 @@ class Category extends Component {
     localStorage.setItem("auth", id.auth);
     socket.emit('log', query);
     console.log('category', this.props)
+    socket.emit('userLogin', query);
   }
 
   componentWillUnmount() {

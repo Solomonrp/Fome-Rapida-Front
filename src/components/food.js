@@ -13,7 +13,7 @@ class Food extends Component {
   state = {
     id: 0,
     quantity: 0,
-    price: 0
+    price: 0,
   }
 
   handleClickCart = () => {
@@ -35,7 +35,7 @@ class Food extends Component {
   handleMinusBtn = (event) => {
     let quantity = Number(event.currentTarget.previousSibling.innerText);
     let id = event.currentTarget.parentNode.id;
-    let price = parseFloat(document.querySelectorAll('.food__price_wrapper')[id].innerText.slice(8, 90))
+    let price = parseFloat(document.querySelectorAll('.food__price_wrapper')[id].innerText.slice(8, 90));
     if (quantity === 1) {
       return
     }

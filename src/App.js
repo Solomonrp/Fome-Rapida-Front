@@ -36,27 +36,6 @@ class App extends Component {
     background: 33,
     response: '',
     table: 'bancada',
-    realizando: [{ numPedido: 50, mesa: 10, item: "teste", quantidade: 50 }, { numPedido: 70, mesa: 15, item: "teste", quantidade: 80 }, { numPedido: 90, mesa: 18, item: "teste", quantidade: 90 }, { numPedido: 49, mesa: 50, item: "teste", quantidade: 500 }],
-    pedidos: [
-      {
-        numPedido: 50,
-        mesa: 10,
-        itens: [{ product: "teste", quantidade: 50, tempo: "1:15", tempoRestante: "1:15", status: 'realizando' }, { product: "teste", quantidade: 50, tempo: "1:15", tempoRestante: "1:15", status: 'realizando' }, { product: "teste", quantidade: 50, tempo: "0:05", tempoRestante: "0:05", status: 'realizando' }],
-        ItensConcluidos: 0,
-        statusPedido: 'realizado',
-        tempoTotalInicial: '1:15',
-        tempoTotalRestante: '1:15',
-      },
-
-      {
-        numPedido: 56,
-        mesa: 19,
-        itens: [{ product: "teste", quantidade: 80, tempo: "0:03", tempoRestante: "0:03", status: 'realizando' }, { product: "teste", quantidade: 50, tempo: "0:09", tempoRestante: "0:09", status: 'realizando' }],
-        ItensConcluidos: 0,
-        statusPedido: 'realizado',
-        tempoTotalInicial: '0:09',
-        tempoTotalRestante: '0:09',
-      }],
   }
 
   componentDidMount() {
@@ -178,56 +157,56 @@ class App extends Component {
     name: "mussarela",
     price: 100,
     quantity: 1,
-    time: "30"
+    time: "0:10"
   }, {
     img: testeImg,
     category: "pizza",
     name: "pizza2",
     price: 10,
     quantity: 1,
-    time: "30"
+    time: "0:10"
   }, {
     img: testeImg,
     category: "pizza",
     name: "pizza3",
     price: 200,
     quantity: 1,
-    time: "30"
+    time: "0:10"
   }, {
     img: testeImg,
     category: "pizza",
     name: "pizza4",
     price: 60,
     quantity: 1,
-    time: "30"
+    time: "0:10"
   }, {
     img: testeImg,
     category: "pizza2",
     name: "pizza5",
     price: 120,
     quantity: 1,
-    time: "30"
+    time: "0:10"
   }, {
     img: testeImg,
     category: "pizza2",
     name: "pizza6",
     price: 200,
     quantity: 1,
-    time: "30"
+    time: "0:10"
   }, {
     img: testeImg,
     category: "pizza3",
     name: "pizza7",
     price: 900,
     quantity: 1,
-    time: "30"
+    time: "0:30"
   }, {
     img: testeImg,
     category: "pizza3",
     name: "pizza8",
     price: 700,
     quantity: 1,
-    time: "30"
+    time: "0:30"
   },
   ]
 
@@ -235,6 +214,7 @@ class App extends Component {
 
 
   handleCart = (value) => {
+    console.log(`cart` ,value);
     let carts = this.state.cart;
     carts.push(value);
     const array = carts.map(item => {
@@ -253,7 +233,8 @@ class App extends Component {
       cart: carts,
       price: price,
       quantity: quantity,
-      cartQ: carts.length
+      cartQ: carts.length,
+
     })
   }
 
@@ -316,59 +297,6 @@ class App extends Component {
     console.log('alterado', carts)
   }
 
-  alterStateTempoRestante = (tipo, pedido, item, tempo) => {
-    const state = { ...this.state };
-    switch (tipo) {
-      case 'item':
-        state.pedidos[pedido].itens[item].tempoRestante = tempo.join(':');
-        break;
-      case 'pedido':
-        state.pedidos[pedido].tempoTotalRestante = tempo.join(':');
-        break;
-      default:
-        console.log('deu muito ruim')
-    }
-    this.setState(state);
-  }
-
-  alterStateAtrasado = (tipo, pedido, item) => {
-    const state = { ...this.state };
-    switch (tipo) {
-      case 'item':
-        state.pedidos[pedido].itens[item].status = 'atrasado';
-        break;
-      case 'pedido':
-        state.pedidos[pedido].statusPedido = 'atrasado';
-        break;
-      default:
-        console.log('Deu muito ruim cara ;_:');
-    }
-    this.setState(state);
-  }
-
-  alterStateConcluido = (Indexpedido, item) => {
-    const state = { ...this.state };
-
-    state.pedidos[Indexpedido].itens[item].status = 'concluido';
-
-    if (state.pedidos[Indexpedido].ItensConcluidos === 0) {
-      state.pedidos[Indexpedido].ItensConcluidos = 1;
-      this.setState(state);
-    } else {
-      state.pedidos[Indexpedido].ItensConcluidos = state.pedidos[Indexpedido].ItensConcluidos + 1;
-      this.setState(state);
-    }
-    this.verifyStatus(Indexpedido);
-  }
-
-  verifyStatus = (Indexpedido) => {
-
-    if (this.state.pedidos[Indexpedido].itens.length === this.state.pedidos[Indexpedido].ItensConcluidos) {
-      this.state.pedidos[Indexpedido].statusPedido = 'concluido';
-    }
-
-  }
-
   counterLis = () => {
     let cardActiveTablesCounter = document.querySelectorAll('div.cards.active-tables > div.list > ul > li').length;
     let cardRightCounter = document.querySelectorAll('div.cards.right > div.list > ul > li').length;
@@ -399,9 +327,6 @@ class App extends Component {
     }
     const contextValues = {
       state: this.state,
-      alterStateAtrasado: this.alterStateAtrasado,
-      alterStateConcluido: this.alterStateConcluido,
-      alterStateTempoRestante: this.alterStateTempoRestante,
       counterLis: this.counterLis,
     }
 
