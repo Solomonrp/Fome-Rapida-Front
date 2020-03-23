@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import socketIOClient from 'socket.io-client';
+import events from 'events'
 import AppContext from "../src/context/AppContext";
 import axios from 'axios';
 import './App.css';
@@ -61,7 +62,8 @@ class App extends Component {
 
   componentDidMount() {
     const socket = this.state.socket;
-    socket.on('up', data => console.log('hello', data));
+    socket.on.setMaxListeners(11);
+    // socket.on('up', data => console.log('hello', data));
     this.handleAuth()
   }
 
