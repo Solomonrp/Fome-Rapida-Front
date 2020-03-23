@@ -40,7 +40,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const socket = this.state.socket;
+    // const socket = this.state.socket;
     // socket.on.setMaxListeners(11);
     // socket.on('up', data => console.log('hello', data));
     this.handleAuth()
