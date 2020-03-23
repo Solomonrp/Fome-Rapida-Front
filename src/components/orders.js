@@ -12,7 +12,7 @@ class Orders extends Component {
 
   }
 
-  changeCart = (id, quantity, price) => {
+  changeCart = (id, quantity, price, status) => {
     this.props.handleCartChange(id, quantity, price);
     this.props.handlePrice();
   }
