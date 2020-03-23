@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom';
 import Nav from '../components/nav';
 import Food from '../components/food';
 import querySearch from 'stringquery';
+import '../style/orders.css';
 
 export const Order = (props) => {
 
   const [orders, setOrders] = useState('');
 
-  
+
   useEffect(() => {
     getOrders();
   }, [])
@@ -18,7 +19,7 @@ export const Order = (props) => {
     const id = localStorage.getItem("id");
     try {
       const orders = await axios.post(`${process.env.REACT_APP_BACK_END}/paidorders`, id);
-      console.log('pedidos',orders.data);
+      console.log('pedidos', orders.data);
       setOrders(orders.data);
     } catch (error) {
       console.log(error)
@@ -33,13 +34,24 @@ export const Order = (props) => {
 
   return (
     <div>
-      <Nav/>
-      {
-        orders &&
-        orders.map((pedidos, index) => {
-          return <Link to={`/pedidos?pedido=${pedidos._id}`}>{pedidos.date}</Link>
-        })
-      }
+      <Nav />
+      <div>
+        <h1 className="food__tittle">Pedidos Realizados</h1>
+      </div>
+      <div className="orders_wrapper">
+        <a className="orders_food"> Realizado | Status</a>
+        {
+          orders &&
+          orders.map((pedidos, index) => {
+            return <Link className="orders_food" to={`/pedidos?pedido=${pedidos._id}`}>
+              {pedidos.date.split('T')[0]} |
+            {
+                pedidos.concluido &&
+                <span>Concluido</span>
+              }</Link>
+          })
+        }
+      </div>
     </div>
   )
 }

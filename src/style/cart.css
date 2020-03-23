@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Barlow&display=swap');
+
 @media only screen and (min-width : 320px) and (max-width : 1024px) {
   .cart__wrapper {
-    background: yellow;
+    background: #191c2c;
     position: fixed;
     display: flex;
     justify-content: space-evenly;
@@ -22,6 +24,10 @@
 
   .cart__closed {
     width: 400px;
+    /* border-radius: 2%; */
+    /* margin: 5%; */
+    background: #323859;
+    /* padding: 2% 0%; */
   }
 
   .cart__opened {
@@ -30,5 +36,86 @@
 
   .cart__items {
     padding: 0px 5px;
+    color:white;
+  }
+
+  .cart__price {
+    color:white;
+    font-size: 20px;
+    font-family: 'Barlow', sans-serif;
+  }
+
+  .cart__paymentwrapper {
+    text-align: end;
+    margin: 3% 2%;
+    width: 89%
+  }
+
+  /* .cart__paymentbtn {
+    text-decoration: none;
+    color: white;
+    background: red;
+    padding: 10px;
+    border-radius: 25px;
+  } */
+  .cart__paymentbtn {
+    display: inline-block;
+    padding: 0.7em 1.4em;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 0.15em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto',sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: #FFFFFF;
+    background-color: #3369ff;
+    box-shadow: inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+    text-align: center;
+    position: relative;
+  }
+
+  .cart__paymentbtn:active{
+    top:0.1em;
+  }
+
+  i {
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 6px;
+  }
+
+  .up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+  }
+
+  .down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+
+  .cart__remuseWrapper {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    align-items: center;
+    margin: 1% 0%;
+    margin-bottom: 3%;
+  }
+
+  .cart__resume {
+    color: white;
+    font-size: 20px;
+    font-family: 'Barlow', sans-serif;
+  }
+
+  .itemStyle {
+    padding: 10px 0px;
+    padding-top: 4%;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-evenly;
   }
 }

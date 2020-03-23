@@ -17,6 +17,8 @@ class Category extends Component {
     socket.emit('log', query);
     localStorage.setItem("id", id.id);
     localStorage.setItem("auth", id.auth);
+    socket.emit('log', query);
+    console.log('category', this.props)
     socket.emit('userLogin', query);
   }
 
@@ -27,16 +29,21 @@ class Category extends Component {
   render() {
     return (
       <div className="wrapper2">
-        <Nav cart={this.props.data} />
+        <Nav cart={this.props.state} />
         <div className="category">
-          {
-            this.props.data.map ?
-              this.props.data.map((food, index) => {
-                return <Food key={index} type='category' {...food} />
-              })
-              :
-              <div>Loading</div>
-          }
+          <div>
+            <h1 className="food__tittle">Categorias</h1>
+          </div>
+          <div>
+            {
+              this.props.data.map ?
+                this.props.data.map((food, index) => {
+                  return <Food key={index} type='category' {...food} />
+                })
+                :
+                <div>Loading</div>
+            }
+          </div>
           <Food type='category' />
           <Food type='category' />
           <Food type='category' />

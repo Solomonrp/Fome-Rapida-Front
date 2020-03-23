@@ -1,0 +1,13 @@
+.orders_wrapper {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 10% auto;
+  border-radius: 3%;
+  padding: 2% 0%;
+}
+
+.orders_food {
+  margin: 2% 0%;
+}
