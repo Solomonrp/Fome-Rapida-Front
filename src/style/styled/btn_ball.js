@@ -1,16 +1,15 @@
 import styled, { css } from 'styled-components';
 
 const Abtn = styled.a`
-  background: red;
-  border: 1px solid red;
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center;
-  width: 45px;
-  height: 25px;
-  border-radius: 15px;
-  cursor: pointer;
+background: #ff6857;
+border: 1px solid #ff6857;
+color: white;
+font-size: 20px;
+width: 25px;
+border-radius: 53%;
+cursor: pointer;
+padding: 1% 1%;
+
 `
 const payBtn = styled.a`
 

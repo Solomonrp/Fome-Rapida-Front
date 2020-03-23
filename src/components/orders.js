@@ -5,7 +5,7 @@ import Cart from '../components/cart';
 
 class Orders extends Component {
 
-  componentDidMount(){
+  componentDidMount() {
     // this.props.background(100);
     // this.props.handleCartChange(1,5,5);
     document.body.classList.add('orderBack');
@@ -26,6 +26,9 @@ class Orders extends Component {
       <React.Fragment>
         <Nav />
         <div>
+          <h1 className="food__tittle">Pedido</h1>
+        </div>
+        <div>
           {
             this.props.orders &&
             this.props.orders.map((food, index) => {
@@ -36,7 +39,7 @@ class Orders extends Component {
           {/* <Food type='cart' /> */}
           {/* <Food type='cart' /> */}
         </div>
-        <Cart handlePay= {this.props.handlePay} sendOrder={this.props.sendOrder} state={this.props.state} orders={this.props.orders}/>
+        <Cart handlePay={this.props.handlePay} sendOrder={this.props.sendOrder} state={this.props.state} orders={this.props.orders} />
       </React.Fragment>
     )
   }

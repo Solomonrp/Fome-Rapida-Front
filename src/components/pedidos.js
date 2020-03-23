@@ -38,13 +38,13 @@ export const Pedidos = (props) => {
         pedidoId.length > 0 ?
         pedidoId.map((comidas, index) => {
           return comidas.order.map((comida, index) =>{
-            return <Food quantity={comida.quantity} img={comida.img} name={comida.name} time={comida.time} key={index} />
+            return <Food type="feito" quantity={comida.quantity} img={comida.img} name={comida.name} time={comida.time} key={index} />
           })
         })
         : 
         props.state.length > 0 ?
           props.state.map((food, index) => {
-          return <Food quantity={food.quantity} idCart={index} img={food.img} name={food.name} time={food.time} key={index} />
+          return <Food type="feito" quantity={food.quantity} idCart={index} img={food.img} name={food.name} time={food.time} key={index} />
         })
         :
         <span>Não temos nenhum pedido para exibir</span>

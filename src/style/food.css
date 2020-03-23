@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Barlow|Roboto+Mono&display=swap');
+
 @media only screen and (min-width : 320px) and (max-width : 1024px) {
   .food {
     background: #191c2c;
@@ -63,7 +65,13 @@
 
   .food__data_desc > span {
     margin: 5px 0px;
-    color: white
+    color: white;
+    font-size: 22px;
+    /* font-family: 'Roboto Mono', monospace; */
+    /* font-family: 'Fredericka the Great', cursive; */
+    font-family: 'Barlow', sans-serif;
+    
+
   }
 
   .food_desc {
@@ -81,6 +89,7 @@
 
   .food_desc2_wrapper {
     padding-top: 8%;
+    margin-right: 2%;
   }
 
   .food_desc2 {
@@ -94,23 +103,38 @@
       padding-top: 0px;
       padding-bottom: 2px;
       text-decoration: none;
+    background: #ff6857;
   }
 
   .food__price_wrapper {
-    padding-top: 7%;
+    padding-top: 12%;
   }
 
   .food__price_wrapper > span {
-    color: white
+    color: white;
+    font-size: 17px;
+    font-family: 'Roboto Mono', monospace;
+    /* font-family: 'Fredericka the Great', cursive; */
+
   }
 
   .food_desc_wrapper {
     display: flex;
     flex-direction: column;
+    background: #ff6857;
+    border-radius: 20px;
+    padding: 7px 0px 0px 0px;
+    margin-right: 2%;
   }
 
+  .food_desc_pedidos {
+    margin-top: 5%;
+  }
+
+
+
   .food_desc_plus {
-    margin-top: -31%;
+    margin-top: -40%;
   }
 
   .food__desc--category{
@@ -119,6 +143,9 @@
     flex-direction: column;
     height: 66px;
     justify-content: space-between;
+    background: #ff6857;
+    border-radius: 20px;
+    margin-right: 2%;
   }
 
   .food__desc--category > a {
@@ -128,6 +155,13 @@
 
   .food_desc_quantity {
     margin-top: 13%;
+    /* font-family: 'Fredericka the Great', cursive; */
+    font-family: 'Barlow', sans-serif;
+  }
+
+  .food_desc_quantity__pedidos  {
+    margin-top: 10%;
+    font-family: 'Barlow', sans-serif;
   }
 
   .food_desc_minus {
@@ -135,7 +169,13 @@
   }
 
   .checked {
-    color: orange;
+    color: white;
+  }
+
+  .food__tittle {
+    color: white;
+    /* font-family: 'Fredericka the Great', cursive; */
+    font-family: 'Barlow', sans-serif;
   }
 
 }

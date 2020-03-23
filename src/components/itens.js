@@ -41,6 +41,7 @@ class Itens extends Component {
     return (
       <React.Fragment>
         <Nav />
+        <h1 className="food__tittle">Itens</h1>
         <div>
           {
             this.state.filtered ?

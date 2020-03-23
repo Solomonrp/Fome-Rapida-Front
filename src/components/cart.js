@@ -15,40 +15,40 @@ class Cart extends Component {
   }
 
   cartRef = React.createRef();
+  cartBtn = React.createRef()
 
-  
   componentDidUpdate(prevState, prevProps) {
-    console.log('prevstate',prevState.orders)
-    console.log('prevstate',prevState.orders.length)
+    console.log('prevstate', prevState.orders)
+    console.log('prevstate', prevState.orders.length)
     console.log(prevProps)
     console.log(prevState.orders.length)
     console.log(prevProps.items)
-    let quantity = prevState.orders.map( item => {
+    let quantity = prevState.orders.map(item => {
       return item.quantity;
     })
     quantity = quantity.reduce((acc, total) => {
       return acc + total;
     })
-    if(prevProps.quantity !== quantity){
+    if (prevProps.quantity !== quantity) {
       this.setState({
         quantity: quantity
       })
     }
-    if(prevProps.items !== prevState.orders.length) {
+    if (prevProps.items !== prevState.orders.length) {
       this.setState({
         items: prevState.orders.length
       })
       this.handleTeste()
     }
   }
-  
+
   handleTeste = () => {
-    console.log('orders',this.props.orders)
-    const array = this.props.orders.map( item => {
+    console.log('orders', this.props.orders)
+    const array = this.props.orders.map(item => {
       return item.price * item.quantity;
     })
-    
-    console.log('priceeee',array);
+
+    console.log('priceeee', array);
     const price = array.reduce((acc, total) => {
       // console.log('accPrice',acc)
       // console.log('total',total)
@@ -77,15 +77,21 @@ class Cart extends Component {
     //     marg: this.state.oldMarg        
     //   })
     // }
+    const cartBtn = this.cartBtn.current;
+    if (cartBtn.classList.value === 'up') {
+      cartBtn.classList.value = 'down';
+    } else {
+      cartBtn.classList.value = 'up';
+    }
     if (!this.state.step) {
-    this.setState({
-      step: true
-    })
-  } else {
-    this.setState({
-      step: false
-    })
-  }
+      this.setState({
+        step: true
+      })
+    } else {
+      this.setState({
+        step: false
+      })
+    }
 
   }
 
@@ -120,46 +126,52 @@ class Cart extends Component {
       // "margin": `0px 0px -${this.state.marg * 20}px 0px`
     }
 
-    const itemStyle = {
-      "padding": "10px 0px",
-      "fontSize": "20px"
-    }
+    // const itemStyle = {
+    //   "padding": "10px 0px",
+    //   "fontSize": "20px"
+    //   padding: 10px 0px;
+    // font-size: 20px;
+    // display: flex;
+    // justify-content: space-evenly;
+    // }
 
     const transitionOptions = {
       transitionName: "fade",
       // mountOnEnter: 500,
       transitionEnterTimeout: 500,
       transitionLeaveTimeout: 500
-      
+
     }
 
     return (
       <div ref={this.cartRef} className="cart__wrapper" style={styleWrapper}>
-        <div>
-          <img src={cart} className="nav_car_img" />
-        </div>
-        {/* <Abtn onClick={() =>this.handlePayM()}>Pay</Abtn> */}
-        <Link to={'/pagamento'}>Pag</Link>
-        <Abtn onClick={() => this.handleCart()} >+</Abtn>
-        <div>
-          <a>R$ {this.props.state.price},00</a>
+        <div className="cart__remuseWrapper">
+          <div>
+            <span className="cart__resume">Resumo do carrinho</span>
+          </div>
+          <Abtn onClick={() => this.handleCart()} >
+            <i ref={this.cartBtn} className="up"></i>
+          </Abtn>
+          <div>
+            <a className="cart__price">R$ {this.props.state.price},00</a>
+          </div>
         </div>
         <div className="cart__closed">
-          {/* {
-            this.state.step &&
-              this.props.orders.map((item, index) => {
-                return <div style={itemStyle} key={index}>{item.name} Q:{item.quantity} R${item.price},00</div>
-              })
-          } */}
           {
             this.state.step &&
-              this.props.state.cart.map((item, index) => {
-                return <div style={itemStyle} key={index}>
-                  <span class="cart__items">{item.name}</span> 
-                  <span class="cart__items">Q:{item.quantity}</span> 
-                  <span class="cart__items">R${item.price},00</span>
-                  </div>
-              })
+            this.props.state.cart.map((item, index) => {
+              return <div className="itemStyle" key={index}>
+                <span class="cart__items">{item.name}</span>
+                <span class="cart__items">Q:{item.quantity}</span>
+                <span class="cart__items">R${item.price},00</span>
+              </div>
+            })
+          }
+          {
+            this.state.step &&
+            <div className="cart__paymentwrapper">
+              <Link className="cart__paymentbtn" to={'/pagamento'}>Pagamento</Link>
+            </div>
           }
         </div>
       </div>

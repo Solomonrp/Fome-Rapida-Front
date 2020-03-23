@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import socketIOClient from 'socket.io-client';
 import AppContext from "../src/context/AppContext";
+import axios from 'axios';
 import './App.css';
 import './style/home.css';
 import Category from './components/category';
@@ -9,6 +10,7 @@ import Itens from './components/itens';
 import Orders from './components/orders';
 import { Pedidos } from './components/pedidos';
 import Login2 from './components/login2';
+import Auth from './components/auth';
 import './App.css';
 import './style/home.css'
 import testeImg from './style/img/category/foodiesfeed.com_neapolitan-pizza-margherita.jpg'
@@ -20,7 +22,7 @@ import Admin from './components/Kitchen/Admin';
 class App extends Component {
 
   state = {
-    cart: [],
+    cart: [{ "type": "food", "id": 0, "img": "/static/media/foodiesfeed.com_neapolitan-pizza-margherita.45fe8613.jpg", "category": "pizza", "name": "mussarela", "price": 100, "quantity": 1, "time": "30" }, { "type": "food", "id": 0, "img": "/static/media/foodiesfeed.com_neapolitan-pizza-margherita.45fe8613.jpg", "category": "pizza", "name": "mussarela", "price": 100, "quantity": 1, "time": "30" }],
     stage: 'buying',
     price: 0,
     quantity: 0,
@@ -30,6 +32,7 @@ class App extends Component {
     password: '',
     endpoint: 'http://localhost:5005/',
     socket: socketIOClient(process.env.REACT_APP_BACK_END),
+    // socket: process.env.REACT_APP_BACK_END,
     background: 33,
     response: '',
     table: 'bancada',
@@ -59,12 +62,31 @@ class App extends Component {
   componentDidMount() {
     const socket = this.state.socket;
     socket.on('up', data => console.log('hello', data));
+    this.handleAuth()
   }
 
   handleState = (value, state) => {
     this.setState({
       [value]: state
     })
+  }
+
+  handleAuth = async () => {
+    const token = {
+      token: localStorage.getItem('auth')
+      // token : 44444
+    }
+    let results;
+    try {
+      const auth = await axios.post(`${process.env.REACT_APP_BACK_END}/auth`, token)
+      console.log('aith', auth.status);
+      results = true;
+    } catch (error) {
+      console.log('errorrrr', error)
+      results = false;
+    }
+    console.log('results', results)
+    return results
   }
 
   // handlePay = () => {
@@ -208,6 +230,8 @@ class App extends Component {
     time: "30"
   },
   ]
+
+
 
 
   handleCart = (value) => {
@@ -371,7 +395,7 @@ class App extends Component {
 
   render() {
     const background = {
-      
+
     }
     const contextValues = {
       state: this.state,
@@ -384,21 +408,34 @@ class App extends Component {
     return (
       <div className="App" style={background}>
         <AppContext.Provider value={contextValues}>
-          {/* <Home /> */}
-          {/* <Nav cart={this.state.cart} /> */}
           <Switch>
             <Route exact path='/' render={() => <Login2 state={this.state} handleState={this.handleState} />} />
-            <Route exact path='/category' render={() => <Category socket={this.state.socket} background={this.handleBackground} data={this.pizzas} />} />
+            <Route exact path='/category' render={() => <Category socket={this.state.socket} background={this.handleBackground} data={this.pizzas} state={this.state.cart} />} />
             <Route path='/category/itens' render={(props) => <Itens {...props} data={this.pizzas} background={this.handleBackground} cartHandler={this.handleCart} />} />
             <Route path='/orders' render={() => <Orders handlePay={this.handlePay} sendOrder={this.sendOrder} handlePrice={this.handlePrice} handleCartChange={this.handleCartChange} state={this.state} background={this.handleBackground} orders={this.state.cart} />} />
-            <Route path='/pagamento' render={() => <Payment sendOrder={this.sendOrder} handlePay={this.handlePay} handleStage={this.handleStage} state={this.state} />} />
-            <Route path='/pagos' render={()=> <Order />} /> 
-            <Route path='/pedidos' render={() => <Pedidos state={this.state.cart} />} />
+            {/* <Route path='/pagamento' render={() => <Payment sendOrder={this.sendOrder} handlePay={this.handlePay} handleStage={this.handleStage} state={this.state} />} /> */}
+            <Auth
+            path='/pagamento'
+            component={Payment}
+            isAuthenticated={this.handleAuth}
+            state={this.state}
+            sendOrder={this.sendOrder} 
+            handlePay={this.handlePay} 
+            handleStage={this.handleStage} 
+            />
+            <Auth 
+            path='/pagos' 
+            component={Order} 
+            isAuthenticated={this.handleAuth} />
+            <Auth
+              exact path='/pedidos'
+              component={Pedidos}
+              isAuthenticated={this.handleAuth}
+              state={this.state.cart}
+            />
             <Route exact path='/Kitchen' component={Kitchen} />
             <Route exact path='/Kitchen/admin' component={Admin} />
-            {/* <Route exact path='/' render={() => <Home changeState={this.changeState} api={this.callApi} data={this.state.allPlants} />} /> */}
           </Switch>
-          {/* <Cart cart={this.state.cart} cartSize={this.state.cartQ} /> */}
         </AppContext.Provider>
       </div>
     );

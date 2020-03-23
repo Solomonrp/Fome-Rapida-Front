@@ -71,9 +71,14 @@ class Food extends Component {
             </div>
           </div>
           {
-            this.props.type !== 'category' &&
+            this.props.type === 'feito' ?
             <div className="food__price_wrapper">
-              <span>Price R${this.props.price},00</span>
+            <span>Stauts</span>
+          </div>
+            :
+            this.props.type !== 'category' && 
+            <div className="food__price_wrapper">
+              <span>R$ {this.props.price},00</span>
             </div>
           }
 
@@ -85,14 +90,19 @@ class Food extends Component {
               : this.props.type === 'food' ?
                 <div className="food__desc--category">
                   <a className="food_desc food_desc_plus" onClick={this.handleClickCart}>+</a>
-                  <Link to={'/orders'} className="food_desc food_desc_plus" onClick={this.handleClickCart}>></Link>
+                  <Link to={'/orders'} className="food_desc food_desc_plus">></Link>
                 </div>
-                :
-                <div id={this.props.idCart} className="food_desc_wrapper">
-                  <a className="food_desc food_desc_plus" onClick={this.handlePlusBtn}>+</a>
-                  <a className="food_desc food_desc_quantity">{this.props.quantity}</a>
-                  <a className="food_desc food_desc_minus" onClick={this.handleMinusBtn}>-</a>
-                </div>
+                : this.props.type === 'feito' ?
+                  <div id={this.props.idCart} className="food_desc_wrapper food_desc_pedidos">
+                    <a className="food_desc food_desc_quantity__pedidos">{this.props.quantity}</a>
+                  </div>
+                  :
+                  <div id={this.props.idCart} className="food_desc_wrapper">
+                    <a className="food_desc food_desc_plus" onClick={this.handlePlusBtn}>+</a>
+                    <a className="food_desc food_desc_quantity">{this.props.quantity}</a>
+                    <a className="food_desc food_desc_minus" onClick={this.handleMinusBtn}>-</a>
+                  </div>
+
           }
 
         </div>
