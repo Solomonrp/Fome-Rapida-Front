@@ -58,7 +58,7 @@ export default class Kitchen extends Component {
                 state.orders[pedido].statusPedido = 'atrasado';
                 axios.put(`${process.env.REACT_APP_BACK_END}/update-order`, state.orders[pedido])
                     .then((res) => {
-                        // this.context.state.socket.emit('orderLate', res);
+                        this.context.state.socket.emit('orderLate', res);
                     })
                     .catch((err) => {
                         console.log('front erros', err)
@@ -91,7 +91,7 @@ export default class Kitchen extends Component {
             this.state.orders[Indexpedido].statusPedido = 'concluido';
             axios.put(`${process.env.REACT_APP_BACK_END}/update-order`, this.state.orders[Indexpedido])
                 .then((res) => {
-                    // this.context.state.socket.emit('orderFinished', res);
+                    this.context.state.socket.emit('orderFinished', res);
                 })
                 .catch((err) => {
                     console.log('front erros', err)
