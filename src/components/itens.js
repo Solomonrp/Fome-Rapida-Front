@@ -21,17 +21,18 @@ class Itens extends Component {
     document.body.classList.remove('itensBack');
   }
 
-  handleCategory = () => {
-    const category = this.props.location.search;
-    const params = queryString.parse(category);
+  handleCategory = async () => {
 
-    const filtered = this.props.data.filter(food => {
-      return food.category === params.category;
-    })
-
-    this.setState({
-      filtered: filtered
-    })
+    try {
+      const category = this.props.location.search;
+      await this.props.handleGetFood(queryString.parse(category).category);
+      this.setState({
+        filtered : this.props.data
+      })
+      console.log('teste', this.props.data)
+    } catch (error) {
+      console.log(error)
+    }
 
   }
 

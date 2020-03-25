@@ -18,11 +18,11 @@ class Cart extends Component {
   cartBtn = React.createRef()
 
   componentDidUpdate(prevState, prevProps) {
-    console.log('prevstate', prevState.orders)
-    console.log('prevstate', prevState.orders.length)
-    console.log(prevProps)
-    console.log(prevState.orders.length)
-    console.log(prevProps.items)
+    // console.log('prevstate', prevState.orders)
+    // console.log('prevstate', prevState.orders.length)
+    // console.log(prevProps)
+    // console.log(prevState.orders.length)
+    // console.log(prevProps.items)
     let quantity = prevState.orders.map(item => {
       return item.quantity;
     })

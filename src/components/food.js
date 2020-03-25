@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../style/food.css';
 import Pizza from "../style/img/category/foodiesfeed.com_neapolitan-pizza-margherita.jpg";
+import Salada from "../style/img/category/salada.jpg";
+import Carne from "../style/img/category/carne.jpg";
+import Bebida from "../style/img/category/can.jpg";
 
 class Food extends Component {
 
@@ -18,7 +21,7 @@ class Food extends Component {
 
   handleClickCart = () => {
     this.props.handleCart(this.props);
-    console.log(this.props)
+    // console.log(this.props)
   }
 
   handlePlusBtn = (event) => {
@@ -26,16 +29,16 @@ class Food extends Component {
     let quantity = event.currentTarget.nextElementSibling.innerText;
     quantity = Number(quantity) + 1;
     event.currentTarget.nextElementSibling.innerText = quantity;
-    let price = parseFloat(document.querySelectorAll('.food__price_wrapper')[id].innerText.slice(8, 90));
+    let price = parseFloat(document.querySelectorAll('.food__price_wrapper')[id].innerText.slice(3, 90));
     this.props.changeCart(id, quantity, price);
     // this.change(id,quantity,price);
-    console.log(price);
+    // console.log(price);
   }
 
   handleMinusBtn = (event) => {
     let quantity = Number(event.currentTarget.previousSibling.innerText);
     let id = event.currentTarget.parentNode.id;
-    let price = parseFloat(document.querySelectorAll('.food__price_wrapper')[id].innerText.slice(8, 90));
+    let price = parseFloat(document.querySelectorAll('.food__price_wrapper')[id].innerText.slice(3, 90));
     if (quantity === 1) {
       return
     }
@@ -46,7 +49,7 @@ class Food extends Component {
 
   render() {
     return (
-      <div className="food" id={this.props.id} category={this.props.category}>
+      <div className="food" id={this.props.id} category={this.props.name}>
         <div className="food_wrapper">
           <div className="food__img">
             <img className="food__img__food" src={this.props.img} />
@@ -65,7 +68,7 @@ class Food extends Component {
                 </div>
               }
               {
-                this.props.type === 'category' && <span>Itens: 10</span>
+                this.props.type === 'category' && <span>Itens: {this.props.quantityProducts}</span>
               }
 
             </div>
@@ -73,19 +76,20 @@ class Food extends Component {
           {
             this.props.type === 'feito' ?
             <div className="food__price_wrapper">
-            <span>Stauts</span>
+            <span>Realizado</span>
           </div>
             :
             this.props.type !== 'category' && 
             <div className="food__price_wrapper">
-              <span>R$ {this.props.price},00</span>
+              <span>R$ {this.props.price},00</span><br/>
+              <span>Tempo: {this.props.time}</span> 
             </div>
           }
 
           {
             this.props.type === 'category' ?
               <div className="food_desc2_wrapper">
-                <Link to={`/category/itens?category=${this.props.category}`} className="food_desc2">></Link>
+                <Link to={`/category/itens?category=${this.props.name}`} className="food_desc2">></Link>
               </div>
               : this.props.type === 'food' ?
                 <div className="food__desc--category">
