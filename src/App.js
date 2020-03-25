@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import socketIOClient from 'socket.io-client';
-import events from 'events'
 import AppContext from "../src/context/AppContext";
 import axios from 'axios';
 import './App.css';
@@ -23,8 +22,11 @@ import Admin from './components/Kitchen/Admin';
 class App extends Component {
 
   state = {
-    cart: [{ "type": "food", "id": 0, "img": "/static/media/foodiesfeed.com_neapolitan-pizza-margherita.45fe8613.jpg", "category": "pizza", "name": "mussarela", "price": 100, "quantity": 1, "time": "30" }, { "type": "food", "id": 0, "img": "/static/media/foodiesfeed.com_neapolitan-pizza-margherita.45fe8613.jpg", "category": "pizza", "name": "mussarela", "price": 100, "quantity": 1, "time": "30" }],
+    // cart: [{ "type": "food", "id": 0, "img": "/static/media/foodiesfeed.com_neapolitan-pizza-margherita.45fe8613.jpg", "category": "pizza", "name": "mussarela", "price": 100, "quantity": 1, "time": "30" }, { "type": "food", "id": 0, "img": "/static/media/foodiesfeed.com_neapolitan-pizza-margherita.45fe8613.jpg", "category": "pizza", "name": "mussarela", "price": 100, "quantity": 1, "time": "30" }],
+    cart: [],
     stage: 'buying',
+    category: [],
+    food: [],
     price: 0,
     quantity: 0,
     cartQ: 0,
@@ -43,7 +45,36 @@ class App extends Component {
     // const socket = this.state.socket;
     // socket.on.setMaxListeners(11);
     // socket.on('up', data => console.log('hello', data));
-    this.handleAuth()
+    // this.handleAuth()
+    // this.handleGetCategory();
+    // this.handleGetFood();
+  }
+
+  handleGetCategory = async () => {
+    try {
+      const category = await axios.get(`${process.env.REACT_APP_BACK_END}/AllCategory`);
+      console.log(category.data);
+      this.setState({
+        category: category.data
+      })
+    } catch (error) {
+      console.log('category', error)
+    }
+  }
+
+  handleGetFood = async (category) => {
+    const select = {
+      category: category
+    }
+    try {
+      const food = await axios.post(`${process.env.REACT_APP_BACK_END}/AllProducts`, select);
+      console.log(food.data);
+      this.setState({
+        food: food.data
+      })
+    } catch (error) {
+      console.log('food', error)
+    }
   }
 
   handleState = (value, state) => {
@@ -216,7 +247,7 @@ class App extends Component {
 
 
   handleCart = (value) => {
-    console.log(`cart` ,value);
+    console.log(`cart`, value);
     let carts = this.state.cart;
     carts.push(value);
     const array = carts.map(item => {
@@ -299,6 +330,31 @@ class App extends Component {
     console.log('alterado', carts)
   }
 
+  checkStatus = () => {
+    this.state.socket.on('updateOrder', data => {
+      let clientId = localStorage.getItem('id');
+      if (clientId === data.clientId) {
+        document.getElementById(data.numberOrder).children[0].innerText = data.statusPedido
+      }
+    }
+    );
+  }
+
+  checkStatus2 = () => {
+    this.state.socket.on('updateOrder', data => {
+      let clientId = localStorage.getItem('id');
+      console.log(data)
+      if (clientId === data.clientId) {
+        document.getElementsByTagName('h1')[0].innerText = `Pedido: ${data.statusPedido}`;
+        let foods = document.querySelectorAll('.food__price_wrapper');
+        for(let i = 0; i < foods.length; i+=1){
+          document.querySelectorAll('.food__price_wrapper')[i].firstChild.innerText = data.statusPedido
+        }
+      }
+    }
+    );
+  }
+
   counterLis = () => {
     let cardActiveTablesCounter = document.querySelectorAll('div.cards.active-tables > div.list > ul > li').length;
     let cardRightCounter = document.querySelectorAll('div.cards.right > div.list > ul > li').length;
@@ -337,26 +393,28 @@ class App extends Component {
         <AppContext.Provider value={contextValues}>
           <Switch>
             <Route exact path='/' render={() => <Login2 state={this.state} handleState={this.handleState} />} />
-            <Route exact path='/category' render={() => <Category socket={this.state.socket} background={this.handleBackground} data={this.pizzas} state={this.state.cart} />} />
-            <Route path='/category/itens' render={(props) => <Itens {...props} data={this.pizzas} background={this.handleBackground} cartHandler={this.handleCart} />} />
+            <Route exact path='/category' render={() => <Category socket={this.state.socket} background={this.handleBackground} handleGetCategory={this.handleGetCategory} data={this.state.category} state={this.state.cart} />} />
+            <Route path='/category/itens' render={(props) => <Itens {...props} data={this.state.food} background={this.handleBackground} handleGetFood={this.handleGetFood} cartHandler={this.handleCart} />} />
             <Route path='/orders' render={() => <Orders handlePay={this.handlePay} sendOrder={this.sendOrder} handlePrice={this.handlePrice} handleCartChange={this.handleCartChange} state={this.state} background={this.handleBackground} orders={this.state.cart} />} />
             {/* <Route path='/pagamento' render={() => <Payment sendOrder={this.sendOrder} handlePay={this.handlePay} handleStage={this.handleStage} state={this.state} />} /> */}
             <Auth
-            path='/pagamento'
-            component={Payment}
-            isAuthenticated={this.handleAuth}
-            state={this.state}
-            sendOrder={this.sendOrder} 
-            handlePay={this.handlePay} 
-            handleStage={this.handleStage} 
+              path='/pagamento'
+              component={Payment}
+              isAuthenticated={this.handleAuth}
+              state={this.state}
+              sendOrder={this.sendOrder}
+              handlePay={this.handlePay}
+              handleStage={this.handleStage}
             />
-            <Auth 
-            path='/pagos' 
-            component={Order} 
-            isAuthenticated={this.handleAuth} />
+            <Auth
+              path='/pagos'
+              component={Order}
+              checkStatus={this.checkStatus}
+              isAuthenticated={this.handleAuth} />
             <Auth
               exact path='/pedidos'
               component={Pedidos}
+              checkStatus={this.checkStatus2}
               isAuthenticated={this.handleAuth}
               state={this.state.cart}
             />

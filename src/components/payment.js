@@ -12,6 +12,7 @@ export const Payment = (props) => {
   const [nome, setNome] = useState('');
   const [cpf, setCpf] = useState('');
   const [pais, setPais] = useState('');
+  const [mesa, setMesa] = useState('');
   const [telefone, setTelefone] = useState('');
   const [card, setCard] = useState('');
   const [cvv, setCvv] = useState('');
@@ -136,12 +137,17 @@ export const Payment = (props) => {
     VMasker(cvv).maskPattern(cvvMask[0]);
     cvv.addEventListener('input', inputHandler.bind(undefined, cvvMask, 5), false);
   }
-  
+
   const handleDate = (e) => {
     var dateMask = ['99/99'];
     var date = document.querySelector('#expDate');
     VMasker(date).maskPattern(dateMask[0]);
     date.addEventListener('input', inputHandler.bind(undefined, dateMask, 6), false);
+  }
+
+  const handleTable = () => {
+    let value = document.getElementById('slct2').options;
+    
   }
 
   return (
@@ -160,10 +166,18 @@ export const Payment = (props) => {
           </div>
           <div class="select">
             {/* <input className="field" type="text" name="PAIS" placeholder="País" onChange={e => setPais(e.target.value)} /> */}
-            <select name="slct" id="slct" onChange={e => setPais(e.target.value)}>
+            <select name="slct" id="slct2" onChange={e => setPais(e.target.value)}>
               <option selected disabled value="pais">Pais</option>
               <option value="br">BR</option>
               <option value="us">US</option>
+            </select>
+          </div>
+
+          <div class="select">
+            <select name="slct" id="slct" onChange={e => setMesa(e.target.value)}>
+              <option selected disabled value="pais">Mesa</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
             </select>
           </div>
 

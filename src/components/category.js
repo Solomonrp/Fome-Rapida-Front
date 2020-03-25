@@ -12,16 +12,29 @@ class Category extends Component {
     const socket = this.props.socket;
     const query = localStorage.getItem("table")
     let id = querySearch(window.location.search);
-    console.log('query', query);
-    console.log('id', id)
+
     socket.emit('log', query);
-    localStorage.setItem("id", id.id);
-    localStorage.setItem("auth", id.auth);
+    console.log('idauth',id.auth)
+    console.log(localStorage.getItem("auth"))
+    if(id.auth === localStorage.getItem("auth") || id.auth === undefined ){
+      console.log('deve estar aqui')
+    } else {
+      localStorage.setItem("auth", id.auth);
+      console.log('não deve estar aqui')
+    }
+
+    if(id.id === localStorage.getItem("id") || id.id === undefined ){
+      console.log('deve estar aqui')
+    } else {
+      localStorage.setItem("id", id.id);
+      console.log('não deve estar aqui')
+    }
     socket.emit('log', query);
-    console.log('category', this.props)
     socket.emit('userLogin', query);
+    this.props.handleGetCategory()
   }
 
+  // não deve estar aqui
   componentWillUnmount() {
     document.body.classList.remove('categoryBack');
   }
@@ -44,9 +57,6 @@ class Category extends Component {
                 <div>Loading</div>
             }
           </div>
-          <Food type='category' />
-          <Food type='category' />
-          <Food type='category' />
         </div>
       </div>
     )
