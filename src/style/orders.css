@@ -11,3 +11,17 @@
 .orders_food {
   margin: 2% 0%;
 }
+
+.order__menu {
+  margin: auto;
+}
+
+.order__itens {
+  display: flex;
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    border-bottom: 1px solid black;
+    padding: 1.5% 0;
+
+}
