@@ -67,7 +67,7 @@ class App extends Component {
       category: category
     }
     try {
-      const food = await axios.post(`${process.env.REACT_APP_BACK_END}/AllProducts`, select);
+      const food = await axios.post(`${process.env.REACT_APP_BACK_END}/listProducts`, select);
       console.log(food.data);
       this.setState({
         food: food.data
