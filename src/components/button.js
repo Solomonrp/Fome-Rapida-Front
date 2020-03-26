@@ -79,7 +79,7 @@ class Button extends Component {
     const btn = {
       border: " 1px solid #9B9B9B",
       width: "100%",
-      height: "33px",
+      height: "51px",
       textAlign: "center",
       paddingTop: "12px",
       margin: '35px 0px',
@@ -105,7 +105,7 @@ class Button extends Component {
     const backgroundGoogle = {
       border: " 1px solid #9B9B9B",
       width: "100%",
-      height: "33px",
+      height: "51px",
       textAlign: "center",
       paddingTop: "12px",
       margin: '35px 0px'

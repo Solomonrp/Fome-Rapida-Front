@@ -31,6 +31,7 @@ export const Login2 = (props) => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState('');
   const [table, setTable] = useState(0);
+  const [message, setMessage] = useState('');
 
   let history = useHistory()
 
@@ -68,9 +69,11 @@ export const Login2 = (props) => {
       const result = await axios.post(`${process.env.REACT_APP_BACK_END}/createUser/aplication`, data)
       console.log(result.headers);
       if (result.status === 200) {
+        setMessage('Cadastro Realizado');
       }
     } catch (error) {
       console.log(error);
+      setMessage('Erro ao cadastrar');
     }
   }
 
@@ -82,7 +85,7 @@ export const Login2 = (props) => {
     }
     try {
       const result = await axios.post(`${process.env.REACT_APP_BACK_END}/user-authentication`, data)
-      console.log(result.headers);
+      // console.log(result.headers);
       console.log(result);
       if (result.status === 200) {
         localStorage.setItem('auth', result.data)
@@ -92,6 +95,7 @@ export const Login2 = (props) => {
       socket.emit('log', email);
       // log
     } catch (error) {
+      setMessage("Login não autorizado")
       console.log(error);
     }
   }
@@ -126,6 +130,15 @@ export const Login2 = (props) => {
       })
   }
 
+  const handleShowPass = () => {
+    let check = document.getElementById('password');
+    if(check.type === 'password'){
+      check.type = 'text';
+    } else {
+      check.type = 'password';
+    }
+  }
+
 
   return (
     <div className="login__wrapper">
@@ -150,10 +163,10 @@ export const Login2 = (props) => {
                 name="show_password"
                 type="checkbox"
                 id="showPass"
-              // onClick={this.handleShowPass}
+              onClick={handleShowPass}
               />
               <label className="label__text">
-                Mostrar a senhaauthHandler
+                Mostrar a senha
               </label>
             </div>
             <Button type="color" handleEvent={login}>Acessar</Button>
@@ -166,10 +179,16 @@ export const Login2 = (props) => {
               <a className="or">ou</a>
               <hr className="or__hr" />
             </div>
+            {
+              message.length > 1 &&
+              <div className="subscribe__message">
+                <span>{message}</span>
+              </div>
+            }
             <Button handleEvent={subscribe}>Cadastrar</Button>
           </div>
           <div className="login__problems">
-            <a className="login__problems__son">Problemas para acessar sua conta?</a>
+            {/* <a className="login__problems__son">Problemas para acessar sua conta?</a> */}
           </div>
         </div>
       </div>
