@@ -99,7 +99,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     z-index: 10;
   }
 
@@ -115,16 +115,13 @@
   }
 
   .nav__wrapper_icons.on .nav__list{
-    /* position: absolute; */
     text-decoration: none;
     list-style-type: none;
-    /* background: #1d1717; */
-    /* margin: 0 0 0 -120px; */
     transition: margin .5s;
     z-index: 1;
-    /* padding: 0px 0px; */
-    width: 26%;
-    display: block
+    width: 40%;
+    display: block;
+    margin-top: 50%;
 }
 
 .nav__wrapper_icons.on .nav_line1 {
