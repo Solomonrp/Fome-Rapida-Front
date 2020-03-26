@@ -67,7 +67,7 @@ class App extends Component {
       category: category
     }
     try {
-      const food = await axios.post(`${process.env.REACT_APP_BACK_END}/listProducts`, select);
+      const food = await axios.post(`${process.env.REACT_APP_BACK_END}/AllProducts`, select);
       console.log(food.data);
       this.setState({
         food: food.data
@@ -340,7 +340,7 @@ class App extends Component {
     );
   }
 
-  checkStatus2 = () => {
+  checkPedido = () => {
     this.state.socket.on('updateOrder', data => {
       let clientId = localStorage.getItem('id');
       console.log(data)
@@ -420,7 +420,7 @@ class App extends Component {
             <Auth
               exact path='/pedidos'
               component={Pedidos}
-              checkStatus={this.checkStatus2}
+              checkPedido={this.checkPedido}
               handleClearCart={this.handleClearCart}
               isAuthenticated={this.handleAuth}
               state={this.state.cart}

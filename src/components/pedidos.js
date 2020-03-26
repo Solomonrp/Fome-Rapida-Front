@@ -12,7 +12,7 @@ export const Pedidos = (props) => {
 
   useEffect(() => {
     console.log('data pedido normal', pedido)
-    props.checkStatus();
+    props.checkPedido();
     getData();
     // props.handleClearCart();
   }, [])

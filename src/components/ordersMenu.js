@@ -72,17 +72,17 @@ export const Order = (props) => {
         <h1 className="food__tittle">Pedidos Realizados</h1>
       </div>
       <div className="orders_wrapper">
-        <a className="orders_food"> Realizado | Status</a>
+        <a className="orders_food"> Realizados</a>
         {
           orders &&
           orders.map((pedidos, index) => {
-            return <Link id={pedidos.numberOrder} className="orders_food" to={`/pedidos?pedido=${pedidos._id}`}>
-              {pedidos.numberOrder} ||
-              {pedidos.date.split('T')[0]} ||
-            {
-                pedidos.statusPedido &&
-                <span>{pedidos.statusPedido}</span>
-              }</Link>
+            return <div className="order__menu" key={index}>
+              <Link id={pedidos.numberOrder} className="orders_food order__itens" to={`/pedidos?pedido=${pedidos._id}`}>
+                <span> {pedidos.numberOrder} - {pedidos.date.split('T')[0]} -
+            {pedidos.statusPedido &&
+                    <span>{pedidos.statusPedido}</span>
+                  }</span></Link>
+            </div>
           })
         }
       </div>

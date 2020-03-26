@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useHistory } from 'react-router-dom'
 
-const Auth = ({ component: Component, state,sendOrder, handlePay,handleStage,checkStatus, handleClearCart, isAuthenticated, ...rest }) => {
+const Auth = ({ component: Component, state,sendOrder, handlePay,handleStage,checkStatus, checkPedido, handleClearCart, isAuthenticated, ...rest }) => {
 
   const [load, setLoad] = useState(true)
   const [logged, setLogged] = useState(false)
@@ -30,7 +30,7 @@ const Auth = ({ component: Component, state,sendOrder, handlePay,handleStage,che
           <div>Loading</div>
           :
           logged === true ?
-            <Component state={state} sendOrder={sendOrder} handlePay={handlePay} handleStage={handleStage} checkStatus={checkStatus} handleClearCart={handleClearCart} {...props} />
+            <Component state={state} sendOrder={sendOrder} handlePay={handlePay} handleStage={handleStage} checkStatus={checkStatus} checkPedido={checkPedido} handleClearCart={handleClearCart} {...props} />
             : <Redirect to="/" />
       }
     />
