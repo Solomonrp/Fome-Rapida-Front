@@ -61,6 +61,9 @@ class Nav extends Component {
           </nav>
 
         </div>
+        <div className="nav__tittle">
+          <span>FOME RÁPIDA</span>
+        </div>
           <Link to={`/orders`}>
             {/* {
               this.props.cart > 1 &&
