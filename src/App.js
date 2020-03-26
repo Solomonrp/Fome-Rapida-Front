@@ -378,6 +378,12 @@ class App extends Component {
     })
   }
 
+  handleClearCart = () => {
+    this.setState({
+      cart: []
+    })
+  }
+
 
   render() {
     const background = {
@@ -415,6 +421,7 @@ class App extends Component {
               exact path='/pedidos'
               component={Pedidos}
               checkStatus={this.checkStatus2}
+              handleClearCart={this.handleClearCart}
               isAuthenticated={this.handleAuth}
               state={this.state.cart}
             />

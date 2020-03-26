@@ -14,6 +14,7 @@ export const Pedidos = (props) => {
     console.log('data pedido normal', pedido)
     props.checkStatus();
     getData();
+    // props.handleClearCart();
   }, [])
 
   // if(props.state.cart){
@@ -56,8 +57,8 @@ export const Pedidos = (props) => {
               })
             })
             :
-            props.state.length > 0 ?
-              props.state.map((food, index) => {
+            pedido.length > 0 ?
+              pedido.map((food, index) => {
                 return <Food type="feito" quantity={food.quantity} idCart={index} img={food.img} name={food.name} time={food.time} key={index} />
               })
               :

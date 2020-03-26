@@ -77,20 +77,22 @@ class Cart extends Component {
     //     marg: this.state.oldMarg        
     //   })
     // }
-    const cartBtn = this.cartBtn.current;
-    if (cartBtn.classList.value === 'up') {
-      cartBtn.classList.value = 'down';
-    } else {
-      cartBtn.classList.value = 'up';
-    }
-    if (!this.state.step) {
-      this.setState({
-        step: true
-      })
-    } else {
-      this.setState({
-        step: false
-      })
+    if(this.state.cart.length >= 1){
+      const cartBtn = this.cartBtn.current;
+      if (cartBtn.classList.value === 'up') {
+        cartBtn.classList.value = 'down';
+      } else {
+        cartBtn.classList.value = 'up';
+      }
+      if (!this.state.step) {
+        this.setState({
+          step: true
+        })
+      } else {
+        this.setState({
+          step: false
+        })
+      }
     }
 
   }
@@ -158,7 +160,7 @@ class Cart extends Component {
         </div>
         <div className="cart__closed">
           {
-            this.state.step &&
+            this.state.step ?
             this.props.state.cart.map((item, index) => {
               return <div className="itemStyle" key={index}>
                 <span class="cart__items">{item.name}</span>
@@ -166,6 +168,8 @@ class Cart extends Component {
                 <span class="cart__items">R${item.price},00</span>
               </div>
             })
+            :
+            <span className="cart_span">Seu carrinho está vazio</span>
           }
           {
             this.state.step &&

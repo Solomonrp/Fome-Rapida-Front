@@ -6,7 +6,7 @@
     margin: 0px 50px;
     padding: 14px 0px;
     border-radius: 10px;
-    height: 73px;
+    height: 101px;
     width: 79%;
     margin-top: 15px;
     /* border: 1px solid #191B4B; */
@@ -82,7 +82,7 @@
     font-weight: bold;
     text-align: center;
     width: 25px;
-    height: 25px;
+    height: 44%;
     border-radius: 15px;
     text-decoration: none;
   }
@@ -96,14 +96,14 @@
       /* background: red; */
       /* border: 1px solid red; */
       color: white;
-      font-size: 20px;
+      font-size: 23px;
       font-weight: bold;
-      border-radius: 15px;
-      padding: 5px;
+      border-radius: 45%;
+      padding: 9px;
       padding-top: 0px;
       padding-bottom: 2px;
       text-decoration: none;
-    background: #ff6857;
+      background: #ff6857;
   }
 
   .food__price_wrapper {
@@ -134,7 +134,7 @@
 
 
   .food_desc_plus {
-    margin-top: -40%;
+    margin-top: -49%;
   }
 
   .food__desc--category{
@@ -154,7 +154,7 @@
   }
 
   .food_desc_quantity {
-    margin-top: 13%;
+    /* margin-top: 13%; */
     /* font-family: 'Fredericka the Great', cursive; */
     font-family: 'Barlow', sans-serif;
   }
@@ -166,7 +166,7 @@
   }
 
   .food_desc_minus {
-    margin-top: 17%;
+    /* margin-top: 17%; */
   }
 
   .checked {
